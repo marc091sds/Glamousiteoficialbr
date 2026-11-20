@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Painel — El Glamour</title>
+<style>
+body{font-family:system-ui,sans-serif;background:#FFF4F7;color:#5E2E41;margin:0;padding:16px;max-width:760px;margin:auto}
+h1{color:#A93C60;font-size:22px}h2{color:#A93C60;font-size:16px;margin:22px 0 8px}
+input,textarea,button{font:inherit}input,textarea{width:100%;padding:10px;border:1.5px solid #f3c2d0;border-radius:10px;box-sizing:border-box}
+button{border:0;border-radius:10px;background:#A93C60;color:#fff;font-weight:700;padding:10px 16px;cursor:pointer}button.o{background:#fff;color:#A93C60;border:1.5px solid #A93C60}
+.c{background:#fff;border-radius:12px;padding:12px;margin-bottom:10px;font-size:14px;line-height:1.45}.c small{opacity:.75}.tg{display:inline-block;background:#FFE3EA;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;margin-right:6px}
+.r{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}#err{color:#b3123f;font-weight:700}
+</style></head><body>
+<h1>Painel da loja — avaliações e perguntas</h1>
+<div id="lg"><input id="s" type="password" placeholder="Senha do painel"><p><button id="go">Entrar</button> <span id="err"></span></p></div>
+<div id="pn" hidden><h2>Avaliações</h2><div id="av"></div><h2>Perguntas</h2><div id="pe"></div></div>
+<script>
+const API="/.netlify/functions/feedback";let senha="";
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+async function chama(corpo){const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({senha,...corpo})});const j=await r.json();if(!r.ok)throw new Error(j.erro||"Erro");return j}
+function pinta(j){
+  document.getElementById("av").innerHTML=j.avaliacoes.length?j.avaliacoes.map(x=>`<div class="c"><span class="tg">${x.status==="aprovada"?"Publicada":"Aguardando"}</span>${x.verificado?'<span class="tg">Compra verificada</span>':""}<b>${esc(x.produtoNome)}</b><br>${"★".repeat(x.nota)}${"☆".repeat(5-x.nota)} — ${esc(x.nome)}, ${esc(x.cidade)} <small>${new Date(x.data).toLocaleDateString("pt-BR")}</small><br>${esc(x.texto)}<div class="r">${x.status!=="aprovada"?`<button data-t="avaliacao" data-i="${x.id}" data-a="aprovar">Aprovar</button>`:""}<button class="o" data-t="avaliacao" data-i="${x.id}" data-a="excluir">Excluir</button></div></div>`).join(""):"<p>Nenhuma avaliação ainda.</p>";
+  document.getElementById("pe").innerHTML=j.perguntas.length?j.perguntas.map(x=>`<div class="c"><span class="tg">${x.status==="respondida"?"Respondida":"Aguardando resposta"}</span><b>${esc(x.produtoNome)}</b><br>${esc(x.nome)} perguntou: ${esc(x.texto)}${x.resposta?`<br><b>Resposta:</b> ${esc(x.resposta)}`:""}<textarea rows="2" id="r${x.id}" placeholder="Sua resposta">${esc(x.resposta||"")}</textarea><div class="r"><button data-t="pergunta" data-i="${x.id}" data-a="responder">${x.resposta?"Atualizar resposta":"Responder e publicar"}</button><button class="o" data-t="pergunta" data-i="${x.id}" data-a="excluir">Excluir</button></div></div>`).join(""):"<p>Nenhuma pergunta ainda.</p>";
+}
+document.getElementById("go").onclick=async()=>{senha=document.getElementById("s").value;try{pinta(await chama({a:"adm_lista"}));document.getElementById("lg").hidden=true;document.getElementById("pn").hidden=false}catch(e){document.getElementById("err").textContent=e.message}};
+document.addEventListener("click",async e=>{const b=e.target.closest("button[data-a]");if(!b)return;
+  if(b.dataset.a==="excluir"&&!confirm("Excluir este item?"))return;
+  try{pinta(await chama({a:"adm_acao",tipo:b.dataset.t,id:b.dataset.i,acao:b.dataset.a,resposta:(document.getElementById("r"+b.dataset.i)||{}).value}))}catch(err){alert(err.message)}});
+</script></body></html>

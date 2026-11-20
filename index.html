@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>El Glamour | Moda Feminina · Variedades — Loja online</title>
+<meta name="description" content="El Glamour — moda feminina e variedades direto de Belém/PA. Frete calculado na hora, entrega por moto/Uber em Belém e pagamento seguro.">
+<meta name="theme-color" content="#FFBCCA">
+<meta property="og:title" content="El Glamour | Moda Feminina · Variedades">
+<meta property="og:description" content="Seu estilo, seu glamour. Compre online e receba em todo o Brasil.">
+<link rel="icon" href="imagens/borboleta.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@500;600;700&family=Montserrat:wght@400;500;600;700;800&family=Alfa+Slab+One&family=Playfair+Display:wght@800;900&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#FFBCCA;--soft:#FFE3EA;--rose:#E58FAA;--deep:#A93C60;--ink:#5E2E41;--bg:#FFF7F9}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg);scroll-behavior:smooth;scroll-padding-top:120px}
+body{font-family:'Montserrat',sans-serif;color:var(--ink);background:var(--bg);min-height:100vh;overflow-x:hidden}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+button{font-family:inherit;cursor:pointer}a{color:inherit}
+h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:30px;color:var(--deep)}
+
+/* faixa + cabeçalho */
+.bar{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--deep);color:#fff;font-size:11.5px;font-weight:600;letter-spacing:.03em;min-height:34px;padding:4px 10px;padding-top:calc(4px + env(safe-area-inset-top,0px));overflow:hidden}
+.bm{flex:0 1 auto;text-align:center;line-height:1.3}
+.bm a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.bm.in{animation:bin .5s ease}
+@keyframes bin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.bb{flex:none;border:0;background:rgba(255,255,255,.18);color:#fff;width:24px;height:24px;border-radius:50%;font-size:15px;line-height:1}
+.hd{background:#fff;border-bottom:1px solid #f6d3dd;position:relative;z-index:30}
+.row1{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:8px;padding-bottom:4px;font-size:12px;font-weight:600}
+.soc{display:flex;gap:6px}
+.soc a,.fav,.mini{display:flex;align-items:center;gap:6px;text-decoration:none}
+.soc a{width:32px;height:32px;border-radius:50%;background:var(--soft);justify-content:center;font-size:15px}
+.links{display:none;gap:22px}
+.links button{border:0;background:none;color:var(--ink);font-weight:600;font-size:12px}
+@media(min-width:760px){.links{display:flex}}
+.mini{border:0;background:var(--soft);color:var(--deep);padding:7px 14px;border-radius:999px;font-weight:700;font-size:12px}
+.mini b{font-weight:800}
+.mini .n{background:var(--deep);color:#fff;border-radius:10px;min-width:20px;height:20px;line-height:20px;text-align:center;font-size:11px;padding:0 5px}
+.row2{display:grid;grid-template-columns:1fr;gap:8px;padding-bottom:10px;align-items:center}
+.logo{justify-self:center;order:-1}
+.logo{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--deep);line-height:1}
+.logo .bf{height:24px;width:auto;display:block;margin-bottom:3px}
+.logo .nm{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:23px;letter-spacing:.03em}
+.logo .sb{display:flex;align-items:center;gap:7px;margin-top:4px;font-size:7px;font-weight:600;letter-spacing:.34em}
+.logo .sb:before,.logo .sb:after{content:"";width:14px;height:1px;background:var(--rose)}
+.logo .sv{margin-top:3px;font-size:6.5px;font-weight:500;letter-spacing:.42em;color:var(--ink)}
+.logo.dk{color:#fff}.logo.dk .sv{color:var(--pink)}.logo.dk .sb:before,.logo.dk .sb:after{background:var(--pink)}
+.search{display:flex;background:#fff;border:1.5px solid #f3c2d0;border-radius:12px;overflow:hidden}
+.search input{flex:1;min-width:0;border:0;padding:0 14px;height:42px;font:500 14px 'Montserrat',sans-serif;color:var(--ink);background:none}
+.search input:focus{outline:none}
+.search button{border:0;background:var(--pink);color:var(--deep);font-weight:700;font-size:12px;padding:0 16px}
+.ac2{display:none}
+@media(min-width:760px){
+ .row2{grid-template-columns:1fr auto 1fr}.logo{order:0}
+ .ac2{display:flex;justify-content:flex-end;gap:20px;font-size:13px;font-weight:600}
+ .ac2 a,.ac2 button{display:flex;align-items:center;gap:6px;text-decoration:none;border:0;background:none;color:var(--ink);font-weight:600;font-size:13px}
+ .search{max-width:340px}
+}
+.nv{background:var(--deep)}
+.nv .wrap{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;justify-content:flex-start}
+@media(min-width:760px){.nv .wrap{justify-content:center}}
+.nv .wrap::-webkit-scrollbar{display:none}
+.nv button,.nv a{flex:none;border:0;background:none;color:#fff;font-weight:700;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;padding:14px 18px;text-decoration:none;border-bottom:3px solid transparent}
+.nv .on{border-bottom-color:var(--pink)}
+.nv a,.nv button{display:inline-flex;align-items:center}
+
+/* banner em slides */
+.bn0{position:relative;overflow:hidden;background:linear-gradient(120deg,#FFD9E1,#FFBCCA 55%,#FFAFC2);height:310px}
+@media(min-width:900px){.bn0{height:390px}}
+.sl{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .7s,visibility .7s;cursor:pointer;color:#fff}
+.sl.on{opacity:1;visibility:visible}
+.sl .pho{position:absolute;inset:0;background:var(--img) center 18%/cover}
+.sl .pho:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(169,60,96,.2),rgba(169,60,96,.7))}
+.sc{position:relative;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding-top:22px;padding-bottom:52px}
+.sc .t1,.sc .t2{font-weight:800;line-height:.9;text-shadow:0 3px 0 rgba(169,60,96,.55),0 8px 22px rgba(94,46,65,.4)}
+.sc .t2{align-self:flex-end;text-align:right}
+.sc b{display:block;font-size:clamp(40px,13vw,92px);letter-spacing:-.02em}
+.sc small{display:block;margin-top:8px;font-weight:600;font-size:clamp(11px,3vw,19px);letter-spacing:.07em;line-height:1.3;text-shadow:0 2px 8px rgba(94,46,65,.7)}
+.sc .pl{display:none}
+@media(min-width:900px){
+ .sl .pho{left:50%;right:auto;width:310px;transform:translateX(-50%);box-shadow:0 0 50px rgba(169,60,96,.4)}
+ .sl .pho:after{background:linear-gradient(180deg,transparent 60%,rgba(169,60,96,.4))}
+ .sc{flex-direction:row;align-items:center;justify-content:space-between;padding-top:0;padding-bottom:30px}
+ .sc .t2{align-self:auto}
+ .sc .pl{display:block;position:absolute;left:50%;top:34%;transform:translateX(-50%);font-size:66px;font-weight:800;z-index:2;text-shadow:0 3px 0 rgba(169,60,96,.6)}
+}
+.igp{position:absolute;left:16px;bottom:14px;z-index:5;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.96);color:var(--ink);padding:5px 14px 5px 6px;border-radius:999px;font-weight:700;font-size:13px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.igp i{width:26px;height:26px;border-radius:8px;background:linear-gradient(45deg,#fdc468,#f0338c 55%,#8a3ab9);display:grid;place-items:center;font-style:normal;font-size:14px}
+.ba{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--deep);font-size:24px;box-shadow:0 3px 10px rgba(0,0,0,.2)}
+.ba.l{left:10px}.ba.r{right:10px}
+.dts{position:absolute;right:16px;bottom:20px;display:flex;gap:7px;z-index:5}
+.dts i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.6);cursor:pointer}
+.dts i.on{background:#fff;width:24px;border-radius:6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 26px;border-radius:999px;border:0;text-decoration:none;font-weight:700;font-size:14px;letter-spacing:.03em;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn.main{background:var(--deep);color:#fff;box-shadow:0 8px 18px rgba(169,60,96,.35);margin-top:18px}
+.btn.line{background:#fff;color:var(--deep);border:1.5px solid var(--deep)}
+.btn[disabled]{opacity:.6;cursor:wait}
+
+/* faixa de benefícios */
+.bn{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+@media(min-width:760px){.bn{grid-template-columns:repeat(4,1fr)}}
+.bn div{background:#fff;border:1px solid #f6d3dd;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:center;font-size:12px;line-height:1.3}
+.bn span{font-size:24px}.bn b{display:block;color:var(--deep);font-size:12.5px}
+
+/* categorias em círculos */
+.cats{position:relative;margin-top:22px}
+.cs{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;padding:6px 4px 8px;justify-content:flex-start}
+@media(min-width:760px){.cs{justify-content:center}}
+.cs::-webkit-scrollbar{display:none}
+.cat{flex:none;width:88px;border:0;background:none;text-align:center;color:var(--ink);font-weight:600;font-size:12px}
+.cat i{display:block;width:76px;height:76px;margin:0 auto 6px;border-radius:50%;border:3px solid var(--pink);padding:2px;background:#fff;overflow:hidden;font-style:normal;font-size:32px;line-height:64px}
+.cat img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.cat.on i{border-color:var(--deep)}.cat.on{color:var(--deep);font-weight:800}
+
+/* barra de ferramentas */
+.tb{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:22px;flex-wrap:wrap}
+.tb small{display:block;font-size:12px;opacity:.8;margin-top:2px}
+.tools{display:flex;gap:8px}
+.tools button,.tools select{height:40px;border:1.5px solid #f3c2d0;border-radius:10px;background:#fff;color:var(--deep);font:600 12.5px 'Montserrat',sans-serif;padding:0 14px}
+.fp{display:none;background:#fff;border:1px solid #f6d3dd;border-radius:14px;padding:14px;margin-top:12px;gap:16px;flex-wrap:wrap;align-items:center;font-size:13px}
+.fp.on{display:flex}
+.fp .chip{min-width:40px;height:34px;padding:0 12px;border-radius:10px;border:1.5px solid var(--rose);background:#fff;color:var(--deep);font-weight:700;font-size:13px}
+.fp .chip.on,.chip.on{background:var(--deep);border-color:var(--deep);color:#fff}
+.fp input{width:110px;height:36px;border:1.5px solid #f3c2d0;border-radius:10px;padding:0 10px;font:500 14px 'Montserrat',sans-serif}
+
+/* produtos */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+@media(min-width:760px){.grid{grid-template-columns:repeat(3,1fr);gap:16px}}
+@media(min-width:1040px){.grid{grid-template-columns:repeat(4,1fr)}}
+.pc{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(181,71,107,.12);display:flex;flex-direction:column}
+.im{position:relative;aspect-ratio:4/5;background:var(--soft);cursor:pointer;overflow:hidden}
+.im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s}
+.im img+img{opacity:0}
+@media(hover:hover){.im:hover img+img{opacity:1}}
+.bd{position:absolute;left:8px;top:8px;z-index:2;background:#fff;color:var(--deep);font-size:10px;font-weight:700;padding:4px 9px;border-radius:999px;box-shadow:0 2px 6px rgba(0,0,0,.12)}
+.hrt{position:absolute;right:8px;top:8px;z-index:2;width:34px;height:34px;border-radius:50%;border:0;background:#fff;color:var(--deep);font-size:17px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.hrt.on{color:#e0245e}
+.pb{padding:10px 10px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pb h3{font-size:13px;font-weight:600;line-height:1.25;min-height:32px}
+.pr{font-size:18px;font-weight:800;color:var(--ink)}
+.pr small{display:block;font-size:11px;font-weight:500;opacity:.75}
+.br{display:flex;gap:6px;margin-top:auto}
+.buy{flex:1;min-height:40px;border:0;border-radius:10px;background:var(--deep);color:#fff;font-weight:700;font-size:12.5px}
+.plus{width:40px;height:40px;border:1.5px solid #f3c2d0;border-radius:10px;background:#fff;color:var(--deep);font-size:20px;font-weight:700}
+.qa{display:none;gap:6px;flex-wrap:wrap;align-items:center;font-size:11.5px;font-weight:600}
+.qa.on{display:flex}
+.qa .chip{min-width:36px;height:32px;padding:0 10px;border-radius:9px;border:1.5px solid var(--rose);background:#fff;color:var(--deep);font-weight:700;font-size:12px}
+.vz{grid-column:1/-1;text-align:center;padding:40px 10px;background:#fff;border-radius:14px}
+
+footer{margin-top:50px;background:var(--deep);color:#fff;padding:34px 0 calc(24px + env(safe-area-inset-bottom,0px));font-size:13px;line-height:1.7}
+.fg{display:grid;gap:24px}
+@media(min-width:760px){.fg{grid-template-columns:1.2fr 1fr 1fr 1fr}}
+footer h4{font-size:12px;letter-spacing:.14em;margin-bottom:8px;color:var(--pink)}
+footer .logo{align-items:flex-start}
+footer a{color:#fff}
+.cp{margin-top:24px;border-top:1px solid rgba(255,255,255,.25);padding-top:14px;text-align:center;font-size:12px;opacity:.9}
+
+
+/* menu: mais categorias */
+@media(min-width:760px){.nv .wrap{overflow:visible}}
+.nv .dd{position:relative;flex:none}
+.nv .ddm{display:none;position:absolute;left:0;top:100%;min-width:210px;background:#fff;border-radius:0 0 12px 12px;box-shadow:0 10px 24px rgba(94,46,65,.25);z-index:60;padding:6px 0}
+.nv .ddm button{display:block;width:100%;text-align:left;color:var(--ink);padding:11px 18px;border:0;font-size:12.5px}
+.nv .ddm button:hover{background:var(--soft)}
+.nv .dd:hover .ddm,.nv .dd.on .ddm{display:block}
+.nv .mo{display:none}
+.nv .dk{display:none}
+@media(max-width:759px){.nv .mo{display:block}}
+@media(min-width:760px){.nv .dk{display:block}}
+/* categorias com setas */
+.cats .ca{position:absolute;top:30px;z-index:3;width:34px;height:34px;border-radius:50%;border:0;background:#fff;color:var(--deep);font-size:20px;box-shadow:0 3px 10px rgba(181,71,107,.3)}
+.cats .ca.l{left:-6px}.cats .ca.r{right:-6px}
+/* cookies e WhatsApp flutuante */
+.ck{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:45;width:min(92vw,430px);background:var(--deep);color:#fff;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px;font-size:12px;line-height:1.35;box-shadow:0 10px 26px rgba(94,46,65,.4)}
+.ck[hidden]{display:none}
+.ck button{flex:none;border:0;border-radius:10px;background:#fff;color:var(--deep);font-weight:800;font-size:12px;padding:9px 16px}
+.wf{position:fixed;right:16px;bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:44;width:56px;height:56px;border-radius:50%;background:#25D366;display:grid;place-items:center;font-size:28px;text-decoration:none;box-shadow:0 8px 20px rgba(37,211,102,.45)}
+
+
+/* página da peça (estilo e-commerce) */
+.mc.pmc{overflow-x:hidden;padding:0;background:#FFF7F9;width:min(100%,1040px)}
+.pmh{display:flex;align-items:center;justify-content:center;gap:10px;position:sticky;top:0;z-index:5;background:#fff;padding:8px 52px;border-bottom:1px solid #f6d3dd;font-size:12px;font-weight:700;color:var(--deep)}
+.pmh .nb{width:30px;height:30px;border-radius:50%;border:1.5px solid #f3c2d0;background:#fff;color:var(--deep);font-size:16px}
+.pmc .pmh .x{position:absolute;right:8px;top:5px;width:34px;height:34px}
+.pmtop{background:#fff;border-radius:14px;margin:12px;padding:14px;display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+@media(min-width:800px){.pmtop{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px}}
+.pmg .big{aspect-ratio:4/5;border-radius:12px;overflow:hidden;background:var(--soft);cursor:pointer}
+.pmg .big img{width:100%;height:100%;object-fit:cover;display:block}
+.pmg .th{overflow-x:auto}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.tags span{border:1px solid #e3b9c6;border-radius:6px;font-size:10px;font-weight:700;padding:3px 8px;color:var(--ink);letter-spacing:.04em}
+.pmi h3{font-size:28px}
+.vbox{border:1px solid #f0cdd9;border-radius:12px;padding:10px;margin:12px 0;background:#fff}
+.vbox h5{margin:0 0 8px!important}
+.vr{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1.5px solid #f3c2d0;border-radius:10px;padding:8px 10px;margin-bottom:8px;cursor:pointer;background:#fff;transition:background .15s,border-color .15s,color .15s}
+.vr .vn{font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px}
+.vr .vk{display:none;width:20px;height:20px;border-radius:50%;background:#fff;color:var(--deep);font-style:normal;font-size:12px;font-weight:800;place-items:center}
+.vr.on{background:var(--deep);border-color:var(--deep);color:#fff;box-shadow:0 4px 12px rgba(169,60,96,.3)}
+.vr.on .vk{display:inline-grid}
+.vq{display:flex;align-items:center;gap:6px}
+.vq button{width:30px;height:30px;border-radius:8px;border:1.5px solid var(--rose);background:#fff;color:var(--deep);font-weight:800;font-size:16px}
+.vq b{min-width:22px;text-align:center}
+.vs{font-size:12.5px;margin-top:2px;font-weight:600;color:var(--deep)}
+.cores{display:flex;flex-wrap:wrap;gap:8px}
+.cr{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 14px;border-radius:10px;border:1.5px solid #f3c2d0;background:#fff;color:var(--ink);font-weight:700;font-size:13px}
+.cr i{width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.2)}
+.cr.on{background:var(--deep);border-color:var(--deep);color:#fff}
+.fbox{background:#fdeef2;border:1px dashed #e5a9bb;border-radius:12px;padding:10px;margin:12px 0}
+.fbox h5{margin:0 0 2px!important}.fbox p{font-size:12px;opacity:.85}
+.fr{display:flex;gap:6px;margin-top:8px}
+.fr input{flex:1;min-width:0;height:40px;border:1.5px solid #f3c2d0;border-radius:10px;padding:0 12px;font:500 14px 'Montserrat',sans-serif}
+.fr button{border:0;border-radius:10px;background:var(--deep);color:#fff;font-weight:700;padding:0 16px;font-size:12.5px}
+.fl{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;padding:7px 0;border-bottom:1px solid #f4d4de}
+.fl small{display:block;opacity:.8}
+.acts2{display:flex;gap:10px;justify-content:center;margin-top:14px}
+.acts2 button,.acts2 a{width:42px;height:42px;border-radius:50%;border:1.5px solid #f3c2d0;background:#fff;display:grid;place-items:center;font-size:17px;color:var(--deep);text-decoration:none}
+.acts2 .on{background:var(--soft);color:#e0245e}
+.pmbot{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin:0 12px 14px}
+@media(min-width:800px){.pmbot{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:start}}
+.pmd,.pmr{background:#fff;border-radius:14px;padding:14px}
+.pmd h4,.pmr h4{font-size:14px;margin-bottom:8px;color:var(--deep)}
+.dtx{max-height:92px;overflow:hidden;position:relative;font-size:13.5px;line-height:1.6}
+.dtx:after{content:"";position:absolute;left:0;right:0;bottom:0;height:42px;background:linear-gradient(rgba(255,255,255,0),#fff)}
+.dtx.open{max-height:none}.dtx.open:after{display:none}
+.lm{display:block;margin:8px auto 0;border:0;background:none;color:var(--deep);font-weight:700;font-size:13px}
+.cj{display:flex;gap:10px;align-items:center;margin-bottom:10px;cursor:pointer}
+.cj img{width:70px;height:88px;object-fit:cover;border-radius:8px}
+.cj b{display:block;font-size:12.5px;margin-bottom:3px}.cj span{font-size:14px;font-weight:800}
+/* barra da sacola */
+.cb2{position:fixed;left:0;right:0;bottom:0;z-index:38;background:#fff;border-top:1px solid #f3c2d0;box-shadow:0 -6px 20px rgba(94,46,65,.15);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px}
+.cb2[hidden]{display:none}
+.cb2 b{color:var(--deep)}
+.cb2 button{border:0;border-radius:999px;background:var(--deep);color:#fff;font-weight:700;font-size:13px;padding:11px 22px}
+.hasbar .ck{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+.hasbar .wf{bottom:calc(150px + env(safe-area-inset-bottom,0px))}
+.hasbar footer{padding-bottom:90px}
+
+
+/* perguntas, avaliações e carrossel na página da peça */
+.pmq,.pmv,.pmc2{background:#fff;border-radius:14px;padding:14px;margin:0 12px 12px}
+.pmq h4,.pmv h4,.pmc2 h4{font-size:14px;margin-bottom:10px;color:var(--deep)}
+.qf{display:grid;gap:8px;margin-bottom:12px}
+.qf input,.qf textarea,.rf input,.rf textarea{width:100%;border:1.5px solid #f3c2d0;border-radius:10px;padding:10px 12px;font:500 14px 'Montserrat',sans-serif;color:var(--ink);background:#fff}
+.qf textarea,.rf textarea{min-height:70px;resize:vertical}
+.qf button,.rf .env{border:0;border-radius:10px;background:var(--ink);color:#fff;font-weight:700;font-size:13px;padding:11px 18px;justify-self:start}
+.qi{border-top:1px solid #f4d4de;padding:10px 0;font-size:13px;line-height:1.5}
+.qi b{color:var(--deep)}.qi small{opacity:.7}
+.qi .rs{margin-top:4px;background:#FFF4F7;border-radius:8px;padding:8px 10px}
+.sm{display:grid;gap:12px;align-items:center;margin-bottom:12px}
+@media(min-width:700px){.sm{grid-template-columns:150px 1fr auto}}
+.sm .nt{text-align:center}.sm .nt b{display:block;font-size:34px;color:var(--ink);line-height:1}
+.stars{color:#f5a623;letter-spacing:2px}.sm small{display:block;font-size:11.5px;opacity:.75}
+.br2{display:flex;align-items:center;gap:8px;font-size:11.5px;margin:3px 0}
+.br2 i{flex:1;height:7px;border-radius:4px;background:#f4d4de;overflow:hidden}.br2 i s{display:block;height:100%;background:#f5a623}
+.rv{border-top:1px solid #f4d4de;padding:12px 0;font-size:13.5px;line-height:1.5}
+.rv .hd2{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-bottom:3px}
+.rv .vf{background:#e8f7ee;color:#17803d;border-radius:6px;font-size:10.5px;font-weight:700;padding:2px 7px}
+.rv small{opacity:.7}
+.rf{background:#FFF4F7;border:1px dashed #e5a9bb;border-radius:12px;padding:12px;margin-bottom:12px;display:grid;gap:8px}
+.rf[hidden]{display:none}
+.rf p{font-size:12px;line-height:1.4;opacity:.9}
+.stp{display:flex;gap:4px}.stp button{border:0;background:none;font-size:30px;line-height:1;color:#e3c3cd;padding:0 2px}
+.stp button.on{color:#f5a623}
+.iso{position:absolute!important;left:-9999px;width:1px!important;height:1px!important;opacity:0;padding:0!important;border:0!important}
+.cj2{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity;padding-bottom:4px}
+.cj2::-webkit-scrollbar{display:none}
+.cc{flex:0 0 150px;border:1px solid #f4d4de;border-radius:12px;overflow:hidden;cursor:pointer;background:#fff}
+.cc img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+.cc div{padding:8px}.cc b{display:block;font-size:12px;line-height:1.25;min-height:30px}.cc span{font-weight:800;font-size:14px}
+.cc u{display:block;text-decoration:none;text-align:center;margin-top:6px;background:var(--deep);color:#fff;border-radius:8px;font-size:12px;font-weight:700;padding:8px}
+.cjw{position:relative}.cjw .ca2{position:absolute;top:35%;z-index:2;width:32px;height:32px;border-radius:50%;border:0;background:#fff;color:var(--deep);box-shadow:0 3px 10px rgba(0,0,0,.25);font-size:18px}
+.cjw .ca2.l{left:-8px}.cjw .ca2.r{right:-8px}
+.cj.big{flex-direction:column;align-items:flex-start}.cj.big img{width:100%;height:auto;aspect-ratio:4/5}
+.st{font-size:12px;color:#c98400;font-weight:700}.st small{color:var(--ink);opacity:.7;font-weight:500}
+
+/* camadas: sacola, produto, informações */
+.ov{position:fixed;inset:0;z-index:40;background:rgba(94,46,65,.5);opacity:0;pointer-events:none;transition:opacity .25s}
+.ov.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:41;width:min(100%,440px);background:#FFF4F7;transform:translateX(100%);transition:transform .3s ease,visibility .3s;display:flex;flex-direction:column;visibility:hidden}
+.drawer.on{transform:none;visibility:visible;box-shadow:-10px 0 30px rgba(94,46,65,.25)}
+.dh{display:flex;align-items:center;justify-content:space-between;padding:calc(14px + env(safe-area-inset-top,0px)) 18px 12px;border-bottom:1px solid #f6d3dd}
+.dh h3{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--deep)}
+.x{width:38px;height:38px;border:0;border-radius:50%;background:#fff;color:var(--deep);font-size:22px;box-shadow:0 2px 8px rgba(181,71,107,.2);flex:none}
+.db{flex:1;overflow-y:auto;padding:14px 18px 22px}
+.db h4{font-size:12px;letter-spacing:.14em;color:var(--deep);margin:20px 0 8px}
+.it{display:flex;gap:10px;align-items:center;background:#fff;border-radius:12px;padding:8px;margin-bottom:8px}
+.it img{width:58px;height:58px;border-radius:8px;object-fit:cover}
+.it div{flex:1;font-size:13px;line-height:1.3}.it b{display:block;color:var(--deep)}
+.q{display:flex;align-items:center;gap:6px}
+.q button{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--rose);background:#fff;color:var(--deep);font-weight:800}
+.vazio{text-align:center;padding:30px 0;font-size:14px}
+.f{display:grid;gap:8px}.f.two{grid-template-columns:1fr 1fr}
+.f input{width:100%;min-height:46px;padding:0 14px;border-radius:12px;border:1.5px solid #f3c2d0;background:#fff;font:500 15px 'Montserrat',sans-serif;color:var(--ink)}
+.f input:focus{outline:2px solid var(--rose);border-color:var(--rose)}
+.f input[readonly]{background:#fdeef2}
+.op{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid #f3c2d0;border-radius:12px;padding:10px 12px;margin-bottom:8px;font-size:13px;cursor:pointer}
+.op input{accent-color:var(--deep);width:18px;height:18px;flex:none}
+.op span{flex:1;line-height:1.3}.op small{display:block;font-size:11.5px;opacity:.85}.op em{font-size:11px}
+.op:has(input:checked){border-color:var(--deep);background:#fff0f4}
+.mut{font-size:13px;opacity:.85}.err{font-size:13px;color:#b3123f;font-weight:600}
+.tot{background:#fff;border-radius:12px;padding:12px 14px;margin-top:14px;font-size:14px}
+.tot p{display:flex;justify-content:space-between;margin:3px 0}
+.tot .g{font-size:18px;font-weight:800;color:var(--deep);border-top:1px dashed #f0b6c7;margin-top:8px;padding-top:8px}
+.acts{display:grid;gap:10px;margin-top:14px}.acts .btn{width:100%;margin-top:0}
+.btn.zap{background:#25D366;color:#073b1c;box-shadow:0 6px 14px rgba(37,211,102,.35)}
+.seg{font-size:11.5px;text-align:center;margin-top:10px;opacity:.85}
+
+.md{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(94,46,65,.55)}
+.md.on{display:flex}
+.mc{position:relative;background:#fff;border-radius:16px;width:min(100%,820px);max-height:94vh;overflow-y:auto;padding:18px}
+.mc .x{position:absolute;right:10px;top:10px;z-index:3}
+.pg{display:grid;gap:16px}
+@media(min-width:760px){.pg{grid-template-columns:1fr 1fr}}
+.pg .big{aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:var(--soft)}
+.pg .big img{width:100%;height:100%;object-fit:cover;display:block}
+.th{display:flex;gap:8px;margin-top:8px}
+.th img{width:62px;height:62px;border-radius:8px;object-fit:cover;border:2px solid transparent;cursor:pointer}
+.th img.on{border-color:var(--deep)}
+.pi h3{font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1.05;color:var(--deep);padding-right:40px}
+.pi .pr{font-size:26px;margin:8px 0}
+.pi h5{font-size:12px;letter-spacing:.12em;margin:14px 0 8px;color:var(--deep)}
+.pi .chips{display:flex;gap:8px;flex-wrap:wrap}
+.pi .chip{min-width:46px;height:42px;padding:0 14px;border-radius:10px;border:1.5px solid var(--rose);background:#fff;color:var(--deep);font-weight:700;font-size:14px}
+.pi .btn{width:100%;margin-top:10px}
+.pi .ds{font-size:13.5px;line-height:1.6;margin:6px 0 4px}
+.pg .big{cursor:pointer}
+.pi a.d{display:block;text-align:center;font-size:12.5px;margin-top:12px;color:var(--deep);font-weight:600}
+.inf h3{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--deep);margin-bottom:10px;padding-right:40px}
+.inf p{font-size:14px;line-height:1.6;margin-bottom:8px}
+
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);z-index:70;background:var(--deep);color:#fff;padding:12px 18px;border-radius:999px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;max-width:92vw;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="bar" id="bar"><button class="bb" id="bbL" aria-label="Aviso anterior">‹</button><div class="bm" id="bm"></div><button class="bb" id="bbR" aria-label="Próximo aviso">›</button></div>
+<header class="hd">
+  <div class="wrap row1">
+    <div class="soc"><a id="sWa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a><a id="sIg" href="#" target="_blank" rel="noopener" aria-label="Instagram">📸</a></div>
+    <div class="links"><button data-i="pag">💳 Formas de Pagamento</button><button data-i="ent">🚚 Formas de Entrega</button></div>
+    <button class="mini" id="cartBtn" aria-label="Abrir sacola">🛍️ <span class="n" id="cnt">0</span> <span>Sua sacola</span> <b id="mtot">R$ 0,00</b></button>
+  </div>
+  <div class="wrap row2">
+    <form class="search" id="sf" role="search"><input id="q" placeholder="Buscar produtos" aria-label="Buscar produtos"><button>Buscar</button></form>
+    <a class="logo" href="#" aria-label="El Glamour — Moda Feminina · Variedades"><img class="bf" src="imagens/borboleta.webp" alt=""><span class="nm">EL GLAMOUR</span><span class="sb">MODA FEMININA</span><span class="sv">VARIEDADES</span></a>
+    <div class="ac2"><a id="atend" href="#" target="_blank" rel="noopener">💬 Atendimento</a><button id="favBtn">♡ Favoritos <b id="fcnt">0</b></button></div>
+  </div>
+  <nav class="nv" aria-label="Categorias"><div class="wrap" id="nv"></div></nav>
+</header>
+
+<section class="bn0" id="bn0" aria-roledescription="carrossel" aria-label="Destaques da loja">
+  <div id="sls"></div>
+  <a class="igp" href="#" id="igp" target="_blank" rel="noopener"><i>📸</i>e.l_glamour ✓</a>
+  <button class="ba l" id="bL" aria-label="Anterior">‹</button><button class="ba r" id="bR" aria-label="Próximo">›</button>
+  <div class="dts" id="dts"></div>
+</section>
+
+<main class="wrap">
+  <div class="bn">
+    <div><span>🚚</span><p><b>Frete na hora</b>Digite o CEP e veja valor e prazo.</p></div>
+    <div><span>🛵</span><p><b>Moto/Uber em Belém</b>Valor combinado no WhatsApp.</p></div>
+    <div><span>🔒</span><p><b>Pagamento seguro</b>Pix ou cartão no Mercado Pago.</p></div>
+    <div><span>💬</span><p><b>Tire dúvidas</b>Tamanho e modelo no WhatsApp.</p></div>
+  </div>
+
+  <div class="cats"><button class="ca l" id="cL" aria-label="Anterior">‹</button><div class="cs" id="cs"></div><button class="ca r" id="cR" aria-label="Próximas">›</button></div>
+
+  <section id="pecas">
+    <div class="tb">
+      <div><h2 id="gt">Todas as peças</h2><small id="gc"></small></div>
+      <div class="tools">
+        <button id="fbtn">Filtrar ⚲</button>
+        <select id="ord" aria-label="Ordenar"><option value="destaque">Destaque</option><option value="menor">Menor preço</option><option value="maior">Maior preço</option><option value="nome">Nome (A–Z)</option></select>
+      </div>
+    </div>
+    <div class="fp" id="fp">
+      <div><b>Tamanho:</b> <span id="fsz"></span></div>
+      <div><b>Preço até:</b> R$ <input id="fmax" type="number" inputmode="numeric" min="0" placeholder="sem limite"></div>
+      <button class="chip" id="fclr">Limpar filtros</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div><span class="logo dk"><img class="bf" src="imagens/borboleta-clara.webp" alt=""><span class="nm">EL GLAMOUR</span><span class="sb">MODA FEMININA</span><span class="sv">VARIEDADES</span></span><p style="margin-top:12px">Belém/PA · Envio para todo o Brasil</p></div>
+      <div><h4>ATENDIMENTO</h4><a id="fzap" href="#" target="_blank" rel="noopener">WhatsApp</a><br><a id="fig" href="#" target="_blank" rel="noopener">@e.l_glamour</a><br><a id="fbio" href="#" target="_blank" rel="noopener">Nossos links</a></div>
+      <div><h4>PAGAMENTO</h4>Pix e cartão pelo Mercado Pago<br>ou finalize pelo WhatsApp<br><a href="#" data-i="pag">Saiba mais</a></div>
+      <div><h4>ENTREGA</h4>Todo o Brasil pelo CEP<br>Moto/Uber em Belém/PA<br><a href="#" data-i="ent">Saiba mais</a></div>
+    </div>
+    <div class="cp">© El Glamour — Moda Feminina · Variedades. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+<div class="ov" id="ov"></div>
+<aside class="drawer" id="drawer" aria-label="Sacola de compras" aria-hidden="true">
+  <div class="dh"><h3>Sua sacola</h3><button class="x" id="closeBtn" aria-label="Fechar">×</button></div>
+  <div class="db">
+    <div id="items"></div>
+    <div id="checkout" hidden>
+      <h4>SEUS DADOS</h4>
+      <div class="f"><input id="nome" placeholder="Nome completo" autocomplete="name"><input id="tel" placeholder="WhatsApp com DDD" inputmode="tel" autocomplete="tel"></div>
+      <h4>ENTREGA</h4>
+      <div class="f">
+        <input id="cep" placeholder="CEP (só números)" inputmode="numeric" maxlength="9" autocomplete="postal-code">
+        <input id="rua" placeholder="Rua (preenchida pelo CEP)" readonly>
+        <div class="f two"><input id="num" placeholder="Número" inputmode="numeric"><input id="comp" placeholder="Complemento"></div>
+        <div class="f two"><input id="bairro" placeholder="Bairro" readonly><input id="cid" placeholder="Cidade/UF" readonly></div>
+      </div>
+      <h4>FRETE</h4>
+      <div id="opc"><p class="mut">Digite o CEP para calcular o frete automaticamente.</p></div>
+      <div class="tot" id="tot"></div>
+      <div class="acts">
+        <button class="btn main" id="pagar">💳 Pagar com Pix ou cartão</button>
+        <button class="btn zap" id="zap">💬 Finalizar pelo WhatsApp</button>
+      </div>
+      <p class="seg">🔒 O pagamento é feito no ambiente seguro do Mercado Pago.</p>
+    </div>
+  </div>
+</aside>
+
+<div class="md" id="md"><div class="mc" id="mc"></div></div>
+<div class="cb2" id="cb2" hidden><span><b id="cbn"></b> · <span id="cbt"></span></span><button id="cbf">Finalizar pedido →</button></div>
+<div class="toast" id="toast" role="status"></div>
+<div class="ck" id="ck" hidden><span>Este site usa cookies para garantir que você tenha a melhor experiência na nossa loja.</span><button id="ckb">Aceitar</button></div>
+<a class="wf" id="wf" href="#" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">💬</a>
+
+<script src="catalogo.js"></script>
+<script>
+if(!window.CATALOGO){document.body.insertAdjacentHTML('afterbegin','<p style="padding:20px;text-align:center;font:600 15px Montserrat,sans-serif;color:#A93C60">Catálogo não carregou: mantenha o arquivo catalogo.js e a pasta imagens junto com o index.html, ou use a versão em arquivo único.</p>');throw new Error('catalogo não carregou')}
+const C=window.CATALOGO,L=C.loja,P=C.produtos,CATS=(C.categorias||[]).filter(c=>P.some(p=>p.categoria===c.id));
+const $=s=>document.querySelector(s);
+const R=v=>v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const norm=s=>(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+const find=id=>P.find(p=>p.id===id);
+const zapUrl=t=>`https://wa.me/${L.whats}?text=${encodeURIComponent(t||"Oi, tudo bem? Vim do site e tenho interesse em algumas peças")}`;
+["sWa","atend","fzap"].forEach(i=>$("#"+i).href=zapUrl());
+$("#sIg").href=$("#fig").href=L.instagram;$("#fbio").href=L.bio;
+
+/* estado */
+const load=(k,d)=>{try{return JSON.parse(localStorage.getItem(k)||d)}catch(e){return JSON.parse(d)}};
+const keep=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let cart=load("elg_cart","[]").filter(i=>find(i.id)&&i.qtd>0),favs=load("elg_fav","[]").filter(id=>find(id));
+let sel=null,ops=[],cidade="",uf="",tCotar,RES={};
+let F={cat:"todos",q:"",ord:"destaque",tam:[],max:0,fav:false};
+const subtotal=()=>cart.reduce((s,i)=>s+i.qtd*find(i.id).preco,0),qtdTotal=()=>cart.reduce((s,i)=>s+i.qtd,0);
+function toast(m,ms=2600){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("on"),ms)}
+
+/* menu, categorias em círculos e filtros */
+function montarMenu(){
+  const MAX=5,vis=CATS.slice(0,MAX),mais=CATS.slice(MAX);
+  const on=id=>F.cat===id&&!F.fav?"on":"";
+  $("#nv").innerHTML=`<button data-c="todos" class="${on("todos")}">Início</button>`
+    +vis.map(c=>`<button data-c="${c.id}" class="${on(c.id)}">${c.nome}</button>`).join("")
+    +mais.map(c=>`<button class="mo ${on(c.id)}" data-c="${c.id}">${c.nome}</button>`).join("")
+    +(mais.length?`<div class="dd dk"><button>Mais categorias ▾</button><div class="ddm">${mais.map(c=>`<button data-c="${c.id}">${c.nome}</button>`).join("")}</div></div>`:"")
+    +`<a href="${zapUrl()}" target="_blank" rel="noopener">Atendimento</a>`;
+  $("#cs").innerHTML=[["todos","Todos",null],...CATS.map(c=>[c.id,c.nome,P.find(p=>p.categoria===c.id).fotos[0]])].map(([id,n,img])=>
+    `<button class="cat ${on(id)}" data-c="${id}"><i>${img?`<img src="${img}" alt="" loading="lazy">`:"💖"}</i>${n}</button>`).join("");
+}
+document.addEventListener("click",e=>{
+  const c=e.target.closest("[data-c]");if(!c)return;
+  F.cat=c.dataset.c;F.fav=false;montarMenu();lista();
+  $(F.cat==="todos"?"body":"#pecas").scrollIntoView({behavior:"smooth"});
+});
+const tamanhos=[...new Set(P.filter(p=>!p.rotulo).flatMap(p=>p.tamanhos))];
+$("#fsz").innerHTML=tamanhos.map(t=>`<button class="chip" data-t="${t}">${t}</button>`).join(" ");
+$("#fsz").onclick=e=>{const t=e.target.dataset.t;if(!t)return;F.tam=F.tam.includes(t)?F.tam.filter(x=>x!==t):[...F.tam,t];e.target.classList.toggle("on");lista()};
+$("#fmax").oninput=e=>{F.max=+e.target.value||0;lista()};
+$("#fbtn").onclick=()=>$("#fp").classList.toggle("on");
+$("#fclr").onclick=()=>{F.tam=[];F.max=0;F.q="";F.fav=false;$("#fmax").value="";$("#q").value="";document.querySelectorAll("#fsz .chip").forEach(c=>c.classList.remove("on"));montarMenu();lista()};
+$("#ord").onchange=e=>{F.ord=e.target.value;lista()};
+$("#q").oninput=e=>{F.q=e.target.value;lista()};
+$("#sf").onsubmit=e=>{e.preventDefault();lista();$("#pecas").scrollIntoView({behavior:"smooth"})};
+$("#favBtn").onclick=()=>{F.fav=!F.fav;F.cat="todos";montarMenu();lista();$("#pecas").scrollIntoView({behavior:"smooth"});if(F.fav&&!favs.length)toast("Toque no ♡ das peças para favoritar")};
+
+/* vitrine */
+function lista(){
+  let l=P.filter(p=>(F.cat==="todos"||p.categoria===F.cat)&&(!F.q||norm(p.nome).includes(norm(F.q)))&&(!F.tam.length||F.tam.some(t=>p.tamanhos.includes(t)))&&(!F.max||p.preco<=F.max)&&(!F.fav||favs.includes(p.id)));
+  if(F.ord==="menor")l=[...l].sort((a,b)=>a.preco-b.preco);
+  if(F.ord==="maior")l=[...l].sort((a,b)=>b.preco-a.preco);
+  if(F.ord==="nome")l=[...l].sort((a,b)=>a.nome.localeCompare(b.nome,"pt-BR"));
+  const cn=(CATS.find(c=>c.id===F.cat)||{}).nome;
+  $("#gt").textContent=F.fav?"Seus favoritos":cn||"Todas as peças";
+  $("#gc").textContent=l.length+(l.length===1?" peça":" peças");vis=l.map(p=>p.id);
+  $("#grid").innerHTML=l.length?l.map(p=>`<article class="pc" data-id="${p.id}">
+   <div class="im" data-o="1"><span class="bd">Destaque</span><button class="hrt ${favs.includes(p.id)?"on":""}" aria-label="Favoritar">${favs.includes(p.id)?"♥":"♡"}</button><img src="${p.fotos[0]}" alt="${p.nome}" loading="lazy">${p.fotos[1]?`<img src="${p.fotos[1]}" alt="" loading="lazy">`:""}</div>
+   <div class="pb"><h3>${p.nome}</h3><div class="pr">${R(p.preco)}</div>${RES[p.id]?`<div class="st">★ ${String(RES[p.id].m).replace(".",",")} <small>(${RES[p.id].n})</small></div>`:""}
+   <div class="qa" data-qa="1"><span>${p.rotulo||"Tamanho"}:</span>${p.tamanhos.map(t=>`<button class="chip" data-add="${t}">${t}</button>`).join("")}</div>
+   <div class="br"><button class="buy" data-o="1">🛒 Comprar</button><button class="plus" data-p="1" aria-label="Adicionar rápido">+</button></div></div></article>`).join("")
+  :`<div class="vz">Nenhuma peça encontrada 💗<br><a href="${zapUrl("Oi! Estou procurando uma peça que não achei no site")}" target="_blank" rel="noopener" style="color:var(--deep);font-weight:700">Chame no WhatsApp e a gente te ajuda</a></div>`;
+}
+$("#grid").addEventListener("click",e=>{
+  const card=e.target.closest(".pc");if(!card)return;const id=card.dataset.id;
+  if(e.target.closest(".hrt")){favs=favs.includes(id)?favs.filter(x=>x!==id):[...favs,id];keep("elg_fav",favs);$("#fcnt").textContent=favs.length;
+    const on=favs.includes(id);e.target.classList.toggle("on",on);e.target.textContent=on?"♥":"♡";if(on)toast("Adicionada aos favoritos 💗");return}
+  if(e.target.dataset.add){const b=e.target;b.classList.add("on");add(id,b.dataset.add);setTimeout(()=>{b.classList.remove("on");const q=card.querySelector(".qa");if(q)q.classList.remove("on")},750);return}
+  if(e.target.closest("[data-p]")){card.querySelector(".qa").classList.toggle("on");return}
+  if(e.target.closest("[data-o]"))produto(id);
+});
+
+/* página da peça (estilo e-commerce) */
+let pm={id:null,i:0,cor:null,q:{}},vis=P.map(p=>p.id);
+const refOf=p=>"ELG"+String(P.indexOf(p)+1).padStart(3,"0");
+const catNome=p=>((C.categorias||[]).find(c=>c.id===p.categoria)||{}).nome||"";
+const cNome=c=>typeof c==="string"?c:c.nome,cHex=c=>typeof c==="string"?"":(c.hex||"");
+function produto(id,i=0){
+  pm={id,i,cor:null,q:{}};$("#mc").className="mc pmc";desenharProduto();abrirMd(true);$("#mc").scrollTop=0;
+  try{history.replaceState(null,"","#produto-"+id)}catch(e){}
+}
+function desenharProduto(){
+  const p=find(pm.id),k=vis.indexOf(pm.id),tot=vis.length,rot=p.rotulo||"Tamanho";
+  const outras=[...new Set(P.filter(x=>x.categoria!==p.categoria).map(x=>x.categoria))].map(c=>P.find(x=>x.categoria===c&&x!==p));
+  const veja=[...P.filter(x=>x!==p&&x.categoria===p.categoria),...P.filter(x=>x!==p&&x.categoria!==p.categoria)].slice(0,4);
+  const todos=P.filter(x=>x!==p).slice(0,10);
+  $("#mc").innerHTML=`<div class="pmh"><button class="nb" data-nav="-1" aria-label="Peça anterior">‹</button><span>${k>=0?k+1:1} de ${k>=0?tot:P.length}</span><button class="nb" data-nav="1" aria-label="Próxima peça">›</button><button class="x" data-mx="1" aria-label="Fechar">×</button></div>
+  <div class="pmtop"><div class="pmg"><div class="big" data-next="1"><img id="pbig" src="${p.fotos[pm.i]}" alt="${p.nome}"></div>
+   <div class="th">${p.fotos.map((f,n)=>`<img src="${f}" data-k="${n}" class="${n===pm.i?"on":""}" alt="Foto ${n+1}">`).join("")}</div></div>
+  <div class="pi pmi"><div class="tags"><span>REF: ${refOf(p)}</span><span>${catNome(p).toUpperCase()}</span><span>DESTAQUE</span></div>
+   <h3>${p.nome}</h3><div class="pr">${R(p.preco)}<small>Pix ou cartão pelo Mercado Pago</small></div>
+   ${p.cores&&p.cores.length?`<div class="vbox"><h5>ESCOLHA A COR</h5><div class="cores">${p.cores.map(c=>`<button class="cr" data-cor="${cNome(c)}">${cHex(c)?`<i style="background:${cHex(c)}"></i>`:""}${cNome(c)}</button>`).join("")}</div></div>`:""}
+   <div class="vbox"><h5>ESCOLHA ${p.rotulo?"O "+rot.toUpperCase():"AS VARIAÇÕES"}</h5>${p.tamanhos.map(t=>`<div class="vr" data-v="${t}"><span class="vn"><i class="vk">✓</i>${t}</span><span class="vq"><button data-qd="-1" aria-label="Menos">−</button><b>0</b><button data-qd="1" aria-label="Mais">+</button></span></div>`).join("")}<div class="vs" id="vs"></div></div>
+   <div class="fbox"><h5>CALCULE O FRETE</h5><p>Informe seu CEP para consultar prazo e valor.</p><div class="fr"><input id="pcep" placeholder="00000-000" inputmode="numeric" maxlength="9"><button data-calc="1">Calcular</button></div><div id="pfr"></div></div>
+   <button class="btn main" id="addb" data-a="1">🛍️ Adicionar à sacola</button><button class="btn line" data-a="2">Comprar agora</button>
+   <div class="acts2"><button data-fav="1" class="${favs.includes(p.id)?"on":""}" aria-label="Favoritar">${favs.includes(p.id)?"♥":"♡"}</button><button data-share="1" aria-label="Compartilhar">↗</button><a href="${zapUrl("Oi! Tenho uma dúvida sobre: "+p.nome+" ("+refOf(p)+")")}" target="_blank" rel="noopener" aria-label="Dúvida no WhatsApp">💬</a></div></div></div>
+  <div class="pmbot"><section class="pmd"><h4>Informações do produto</h4><div class="dtx" id="dtx"><p>${p.desc||""}</p><p style="margin-top:8px"><b>Categoria:</b> ${catNome(p)}<br><b>Referência:</b> ${refOf(p)}<br><b>${p.rotulo?rot+"s":"Tamanhos"}:</b> ${p.tamanhos.join(", ")}</p></div><button class="lm" data-more="1">Ler mais ⌄</button></section>
+   <aside class="pmr"><h4>Compre junto</h4>${outras[0]?`<div class="cj big" data-cj="${outras[0].id}"><img src="${outras[0].fotos[0]}" alt=""><div><b>${outras[0].nome}</b><span>${R(outras[0].preco)}</span></div></div>`:""}
+   <h4 style="margin-top:14px">Veja também</h4>${veja.map(x=>`<div class="cj" data-cj="${x.id}"><img src="${x.fotos[0]}" alt=""><div><b>${x.nome}</b><span>${R(x.preco)}</span></div></div>`).join("")}</aside></div>
+  <section class="pmq"><h4>Perguntas e respostas</h4>
+   <div class="qf"><input id="qn" placeholder="Seu nome" maxlength="40"><textarea id="qt" placeholder="Escreva sua dúvida sobre esta peça (tamanho, tecido, caimento…)" maxlength="400"></textarea><input class="iso" id="qs" tabindex="-1" autocomplete="off" aria-hidden="true"><button data-ask="1">Enviar pergunta</button></div>
+   <div id="ql"><p class="mut">Carregando perguntas…</p></div></section>
+  <section class="pmv"><h4>Avaliações do produto</h4>
+   <div class="sm"><div class="nt"><b id="avm">0,0</b><div class="stars" id="avs">☆☆☆☆☆</div><small id="avn">0 avaliações</small></div><div id="avb"></div><button class="btn line" style="margin:0" data-rev="1">Avaliar produto</button></div>
+   <div class="rf" id="rf" hidden><div class="stp" id="stp" aria-label="Nota">${[1,2,3,4,5].map(n=>`<button data-star="${n}" aria-label="${n} estrela${n>1?"s":""}">★</button>`).join("")}</div>
+    <input id="rn" placeholder="Seu nome" maxlength="40"><input id="rc" placeholder="Sua cidade (ex.: Belém)" maxlength="40">
+    <textarea id="rt" placeholder="Conte como foi sua experiência com a peça" maxlength="600"></textarea>
+    <p>Comprou pelo site? Informe o <b>código do pedido</b> (ex.: ELG-ABC123) e o <b>WhatsApp</b> usado na compra: sua avaliação é publicada na hora com o selo "Compra verificada". Sem o código, a loja confere antes de publicar.</p>
+    <input id="rp" placeholder="Código do pedido (opcional)" maxlength="20"><input id="rw" placeholder="WhatsApp da compra (se tiver o código)" inputmode="tel" maxlength="20">
+    <input class="iso" id="rs" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="env" data-send="1">Enviar avaliação</button></div>
+   <div id="avl"><p class="mut">Carregando avaliações…</p></div></section>
+  <section class="pmc2"><h4>Aproveite e compre junto</h4><div class="cjw"><button class="ca2 l" data-sc="-1" aria-label="Anterior">‹</button><div class="cj2" id="cj2">${todos.map(x=>`<div class="cc" data-cj="${x.id}"><img src="${x.fotos[0]}" alt="" loading="lazy"><div><b>${x.nome}</b><span>${R(x.preco)}</span><u>Comprar</u></div></div>`).join("")}</div><button class="ca2 r" data-sc="1" aria-label="Próximo">›</button></div></section>`;
+  updVar();carregarFeedback();
+}
+function updVar(){
+  const p=find(pm.id);let n=0,txt=[];
+  document.querySelectorAll("#mc .vr").forEach(r=>{const t=r.dataset.v,q=pm.q[t]||0;r.classList.toggle("on",q>0);r.querySelector(".vq b").textContent=q;if(q>0){n+=q;txt.push(`${t} ×${q}`)}});
+  $("#vs").innerHTML=n?`✓ Selecionado: ${txt.join(" · ")} — <b>${R(n*p.preco)}</b>`:"Toque no tamanho ou no + para escolher";
+  $("#addb").textContent=n?`🛍️ Adicionar à sacola · ${R(n*p.preco)}`:"🛍️ Adicionar à sacola";
+}
+function fotoPeca(){const p=find(pm.id);$("#pbig").src=p.fotos[pm.i];document.querySelectorAll("#mc .th img").forEach((e,n)=>e.classList.toggle("on",n===pm.i))}
+async function calcPeca(){
+  const cep=$("#pcep").value.replace(/\D/g,""),out=$("#pfr");
+  if(cep.length!==8){toast("Digite o CEP com 8 números");return}
+  out.innerHTML='<p class="mut" style="margin-top:8px">Calculando…</p>';
+  let v;try{v=await (await fetch(`https://viacep.com.br/ws/${cep}/json/`)).json();if(v.erro)throw 0}catch(e){out.innerHTML='<p class="err" style="margin-top:8px">CEP não encontrado.</p>';return}
+  const qtd=Object.values(pm.q).reduce((a,b)=>a+b,0)||1;let ops=[];
+  try{const r=await fetch("/.netlify/functions/frete",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({cep,itens:[{id:pm.id,qtd}]})});if(r.ok)ops=(await r.json()).opcoes||[]}catch(e){}
+  if(!ops.length)ops=[estimar(v.uf,qtd)];
+  const moto=L.cidadesMoto.some(c=>norm(c)===norm(v.localidade));
+  let h=`<p class="mut" style="margin:8px 0 2px">${v.localidade}/${v.uf}</p>`+ops.map(o=>`<div class="fl"><span>${o.nome}<small>até ${o.prazo} dias úteis${o.estimado?" (estimativa)":""}</small></span><b>${R(o.preco)}</b></div>`).join("");
+  if(moto)h+=`<div class="fl"><span>🛵 Moto / Uber<small>entrega em ${v.localidade}</small></span><b>A combinar</b></div>`;
+  if(!ops.length&&!moto)h+='<p class="mut" style="margin-top:6px">Cotação indisponível agora. Informe o CEP na sacola ou chame no WhatsApp.</p>';
+  out.innerHTML=h;
+  const c=$("#cep");if(c&&!c.value){c.value=cep.slice(0,5)+"-"+cep.slice(5)}
+}
+async function compartilhar(p){
+  const url=location.href.split("#")[0]+"#produto-"+p.id;
+  try{if(navigator.share){await navigator.share({title:p.nome+" — El Glamour",text:"Olha essa peça da El Glamour 💖",url});return}
+    await navigator.clipboard.writeText(url);toast("Link copiado 💗")}catch(e){toast("Não foi possível compartilhar agora")}
+}
+$("#mc").addEventListener("click",e=>{
+  const t=e.target,p=pm.id&&find(pm.id);
+  if(t.closest("[data-mx]"))return abrirMd(false);
+  if(!p)return;
+  const nav=t.closest("[data-nav]");if(nav){const k=vis.indexOf(pm.id),l=vis.length||1;produto(vis[((k<0?0:k)+(+nav.dataset.nav)+l)%l]);return}
+  if(t.closest("[data-next]")){pm.i=(pm.i+1)%p.fotos.length;fotoPeca();return}
+  if(t.dataset.k){pm.i=+t.dataset.k;fotoPeca();return}
+  const cor=t.closest("[data-cor]");if(cor){pm.cor=cor.dataset.cor;document.querySelectorAll("#mc .cr").forEach(c=>c.classList.toggle("on",c.dataset.cor===pm.cor));return}
+  const qd=t.closest("[data-qd]");if(qd){const v=qd.closest(".vr").dataset.v;pm.q[v]=Math.max(0,Math.min(20,(pm.q[v]||0)+ +qd.dataset.qd));updVar();return}
+  const vr=t.closest(".vr");if(vr){const v=vr.dataset.v;pm.q[v]=(pm.q[v]||0)>0?0:1;updVar();return}
+  if(t.closest("[data-calc]"))return calcPeca();
+  if(t.closest("[data-more]")){const d=$("#dtx").classList.toggle("open");t.closest("[data-more]").textContent=d?"Ler menos ⌃":"Ler mais ⌄";return}
+  if(t.closest("[data-fav]")){favs=favs.includes(p.id)?favs.filter(x=>x!==p.id):[...favs,p.id];keep("elg_fav",favs);$("#fcnt").textContent=favs.length;
+    const b=t.closest("[data-fav]"),on=favs.includes(p.id);b.classList.toggle("on",on);b.textContent=on?"♥":"♡";lista();return}
+  if(t.closest("[data-share]"))return compartilhar(p);
+  const cj=t.closest("[data-cj]");if(cj){produto(cj.dataset.cj);return}
+  const a=t.closest("[data-a]");if(a){
+    if(p.cores&&p.cores.length&&!pm.cor){toast("Escolha a cor primeiro 💗");return}
+    const ent=Object.entries(pm.q).filter(([,q])=>q>0);
+    if(!ent.length){toast("Escolha pelo menos um "+(p.rotulo||"tamanho").toLowerCase()+" 💗");return}
+    ent.forEach(([v,q])=>add(p.id,(pm.cor?pm.cor+" · ":"")+v,q,true));
+    toast(`${ent.reduce((s,[,q])=>s+q,0)} ${ent.length>1||ent[0][1]>1?"itens":"item"} de ${p.nome} na sacola ✨`);
+    abrirMd(false);if(a.dataset.a==="2")abrir(true);
+  }
+});
+function info(t){
+  const x={pag:["Formas de pagamento","<p>💳 <b>Pix e cartão</b> pelo Mercado Pago, em ambiente seguro.</p><p>💬 Se preferir, finalize pelo <b>WhatsApp</b> e combine o pagamento com a gente.</p>"],
+   ent:["Formas de entrega",`<p>🚚 <b>Todo o Brasil:</b> digite o CEP na sacola e o frete e o prazo aparecem na hora.</p><p>🛵 <b>${L.cidadesMoto.join(", ")}:</b> entrega por moto/Uber, com valor combinado pelo WhatsApp.</p>`]}[t];
+  pm.id=null;$("#mc").className="mc";$("#mc").innerHTML=`<div class="inf"><button class="x" data-mx="1" aria-label="Fechar">×</button><h3>${x[0]}</h3>${x[1]}</div>`;abrirMd(true);
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-i]");if(b){e.preventDefault();info(b.dataset.i)}});
+function abrirMd(on){if(!on){try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}}
+  $("#md").classList.toggle("on",on);document.body.style.overflow=on?"hidden":""}
+$("#md").onclick=e=>{if(e.target.id==="md")abrirMd(false)};
+
+/* sacola */
+function add(id,tam,qtd=1,mudo=false){
+  const f=cart.find(i=>i.id===id&&i.tam===tam);f?f.qtd+=qtd:cart.push({id,tam,qtd});
+  sel=null;mudou();if(!mudo)toast(find(id).nome+" na sacola ✨");
+}
+function abrir(on){$("#drawer").classList.toggle("on",on);$("#ov").classList.toggle("on",on);$("#drawer").setAttribute("aria-hidden",!on);document.body.style.overflow=on?"hidden":""}
+$("#cartBtn").onclick=()=>abrir(true);$("#closeBtn").onclick=$("#ov").onclick=()=>abrir(false);
+addEventListener("keydown",e=>{if(e.key==="Escape"){abrir(false);abrirMd(false)}});
+function barra(){const n=qtdTotal();$("#cb2").hidden=!n;document.body.classList.toggle("hasbar",n>0);$("#cbn").textContent=n+(n===1?" item":" itens");$("#cbt").textContent=R(subtotal())}
+function mudou(){keep("elg_cart",cart);$("#cnt").textContent=qtdTotal();$("#mtot").textContent=R(subtotal());barra();render();
+  if($("#cep").value.replace(/\D/g,"").length===8){clearTimeout(tCotar);tCotar=setTimeout(cotar,500)}}
+function render(){
+  const box=$("#items");
+  if(!cart.length){box.innerHTML='<p class="vazio">Sua sacola está vazia 🛍️<br>Escolha uma peça para começar.</p>';$("#checkout").hidden=true;return}
+  box.innerHTML=cart.map((i,k)=>{const p=find(i.id);return `<div class="it"><img src="${p.fotos[0]}" alt=""><div><b>${p.nome}</b>${p.rotulo||"Tam."} ${i.tam} · ${R(p.preco)}</div><div class="q"><button data-k="${k}" data-d="-1" aria-label="Menos">−</button><span>${i.qtd}</span><button data-k="${k}" data-d="1" aria-label="Mais">+</button></div></div>`}).join("");
+  $("#checkout").hidden=false;total();
+}
+$("#items").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-k]");if(!b)return;
+  const i=cart[+b.dataset.k];i.qtd+=+b.dataset.d;if(i.qtd<=0)cart.splice(+b.dataset.k,1);
+  sel=null;mudou();
+});
+
+/* CEP + frete automático */
+const motoOk=()=>L.cidadesMoto.some(c=>norm(c)===norm(cidade));
+$("#cep").addEventListener("input",e=>{
+  let v=e.target.value.replace(/\D/g,"").slice(0,8);e.target.value=v.length>5?v.slice(0,5)+"-"+v.slice(5):v;
+  if(v.length===8)cotar();else{sel=null;ops=[];$("#opc").innerHTML='<p class="mut">Digite o CEP para calcular o frete automaticamente.</p>';total()}
+});
+async function cotar(){
+  const cep=$("#cep").value.replace(/\D/g,"");if(cep.length!==8)return;
+  sel=null;ops=[];total();
+  $("#opc").innerHTML='<p class="mut">Buscando endereço e calculando o frete…</p>';
+  try{
+    const v=await (await fetch(`https://viacep.com.br/ws/${cep}/json/`)).json();if(v.erro)throw 0;
+    $("#rua").value=v.logradouro||"";$("#bairro").value=v.bairro||"";cidade=v.localidade;uf=v.uf;$("#cid").value=`${v.localidade}/${v.uf}`;
+  }catch(e){$("#opc").innerHTML='<p class="err">CEP não encontrado. Confira os números.</p>';return}
+  try{
+    const r=await fetch("/.netlify/functions/frete",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({cep,itens:cart.map(i=>({id:i.id,qtd:i.qtd}))})});
+    if(!r.ok)throw 0;ops=(await r.json()).opcoes||[];
+  }catch(e){ops=[]}
+  if(!ops.length&&uf)ops=[estimar(uf,qtdTotal())];
+  let h=ops.map(o=>`<label class="op"><input type="radio" name="env" value="${o.id}"><span><b>${o.nome}</b> ${o.estimado?"<em>(estimativa)</em>":""}<small>até ${o.prazo} dias úteis</small></span><strong>${R(o.preco)}</strong></label>`).join("");
+  if(motoOk())h+=`<label class="op"><input type="radio" name="env" value="moto"><span><b>🛵 Moto / Uber</b><small>Entrega em ${cidade} — valor a combinar no WhatsApp</small></span><strong>A combinar</strong></label>`;
+  if(ops.some(o=>o.estimado))h+='<p class="mut" style="margin:4px 0 8px">Valor estimado por região. O valor final é confirmado antes do envio.</p>';
+  if(!ops.length)h+=`<label class="op"><input type="radio" name="env" value="whats"><span><b>Combinar o frete no WhatsApp</b><small>Não conseguimos cotar agora — informamos o valor pelo WhatsApp</small></span></label>`;
+  $("#opc").innerHTML=h;
+}
+$("#opc").addEventListener("change",e=>{if(e.target.name==="env"){sel=e.target.value;total()}});
+function frete(){if(!sel||sel==="moto"||sel==="whats")return 0;const o=ops.find(x=>x.id===sel);return o?o.preco:0}
+function total(){
+  const s=subtotal(),f=frete();
+  const linha=!sel?"Informe o CEP":sel==="moto"?"A combinar (moto/Uber)":sel==="whats"?"A combinar":R(f);
+  $("#tot").innerHTML=`<p><span>Produtos</span><span>${R(s)}</span></p><p><span>Entrega</span><span>${linha}</span></p><p class="g"><span>Total</span><span>${R(s+f)}${sel==="moto"||sel==="whats"?" + entrega":""}</span></p>`;
+}
+
+/* pedido */
+function dados(){
+  const nome=$("#nome").value.trim(),tel=$("#tel").value.replace(/\D/g,""),cep=$("#cep").value.replace(/\D/g,""),num=$("#num").value.trim();
+  if(!cart.length){toast("Sua sacola está vazia");return null}
+  if(nome.length<3){toast("Digite seu nome completo");$("#nome").focus();return null}
+  if(tel.length<10){toast("Digite seu WhatsApp com DDD");$("#tel").focus();return null}
+  if(cep.length!==8||!$("#rua").value){toast("Informe um CEP válido");$("#cep").focus();return null}
+  if(!num){toast("Digite o número da casa/prédio");$("#num").focus();return null}
+  if(!sel){toast("Escolha a forma de entrega");return null}
+  return {cliente:{nome,tel},endereco:{cep,rua:$("#rua").value,numero:num,compl:$("#comp").value.trim(),bairro:$("#bairro").value,cidade,uf},
+    itens:cart.map(i=>({id:i.id,tam:i.tam,qtd:i.qtd})),entrega:{modo:sel==="moto"?"moto":"envio",servico_id:sel}};
+}
+$("#pagar").onclick=async()=>{
+  const d=dados();if(!d)return;
+  if(sel==="whats"){toast("Para esse frete, finalize pelo WhatsApp 💬");return}
+  const b=$("#pagar");b.disabled=true;b.textContent="Abrindo o pagamento…";
+  try{
+    const r=await fetch("/.netlify/functions/pagamento",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d)});
+    const j=await r.json();if(!r.ok||!j.url)throw new Error(j.erro||"");try{localStorage.setItem("elg_ped",JSON.stringify({pedido:j.pedido,tel:d.cliente.tel}))}catch(e){}location.href=j.url;
+  }catch(e){toast("Pagamento online indisponível agora. Finalize pelo WhatsApp 💬");b.disabled=false;b.textContent="💳 Pagar com Pix ou cartão"}
+};
+$("#zap").onclick=()=>{
+  const d=dados();if(!d)return;
+  const f=frete(),s=subtotal(),e=d.endereco;
+  const ent=sel==="moto"?"Moto/Uber (valor a combinar)":sel==="whats"?"Frete a combinar":`${(ops.find(o=>o.id===sel)||{}).nome}${(ops.find(o=>o.id===sel)||{}).estimado?" (estimativa)":""} — ${R(f)}`;
+  const msg=["Olá! Quero finalizar meu pedido na El Glamour 💖","",
+    ...cart.map(i=>`• ${i.qtd}x ${find(i.id).nome} (${i.tam}) — ${R(i.qtd*find(i.id).preco)}`),"",
+    `Produtos: ${R(s)}`,`Entrega: ${ent}`,`Total: ${R(s+f)}${sel==="moto"||sel==="whats"?" + entrega":""}`,"",
+    `Nome: ${d.cliente.nome}`,`WhatsApp: ${d.cliente.tel}`,
+    `Endereço: ${e.rua}, ${e.numero}${e.compl?" - "+e.compl:""} - ${e.bairro}, ${e.cidade}/${e.uf} - CEP ${e.cep}`].join("\n");
+  window.open(zapUrl(msg),"_blank","noopener");
+};
+
+/* retorno do pagamento */
+const pg=new URLSearchParams(location.search).get("pagamento");
+if(pg==="ok"){cart=[];keep("elg_cart",cart);const pc=new URLSearchParams(location.search).get("pedido");toast("Pagamento aprovado! Obrigada pela compra 💖"+(pc?" Seu código: "+pc+" (use para avaliar as peças)":""),9000)}
+else if(pg==="pendente")toast("Pagamento pendente — assim que confirmar, separamos seu pedido 💗");
+else if(pg==="erro")toast("O pagamento não foi concluído. Sua sacola continua salva.");
+
+/* início */
+$("#fcnt").textContent=favs.length;$("#cnt").textContent=qtdTotal();$("#mtot").textContent=R(subtotal());
+montarMenu();lista();render();barra();
+
+
+/* banner em slides */
+(function(){
+  const SL=[
+   {id:"conjunto-azul-fenda",a:"GLAMOUR",as:"SEU LOOK FAVORITO<br>CHEGOU",b:"NEW IN",bs:"LANÇAMENTOS<br>EXCLUSIVOS",c:"todos"},
+   {id:"pijama-panda",a:"FOFURA",as:"PIJAMAS E<br>MACAQUINHOS",b:"CHARME",bs:"CONFORTO<br>DE SOBRA",c:"pijamas"},
+   {id:"conjunto-vermelho-halter",a:"BRILHE",as:"CONJUNTOS PARA<br>ARRASAR",b:"SEMPRE",bs:"PEÇAS QUE FAZEM<br>VOCÊ BRILHAR",c:"conjuntos"}
+  ].filter(x=>find(x.id));
+  if(!SL.length)return;
+  $("#sls").innerHTML=SL.map((x,k)=>`<div class="sl ${k?"":"on"}" data-cat="${x.c}"><div class="pho" style="--img:url('${find(x.id).fotos[0]}')"></div>
+   <div class="wrap sc"><div class="t1"><b>${x.a}</b><small>${x.as}</small></div><div class="pl">+</div><div class="t2"><b>${x.b}</b><small>${x.bs}</small></div></div></div>`).join("");
+  $("#dts").innerHTML=SL.map((_,k)=>`<i class="${k?"":"on"}" data-k="${k}"></i>`).join("");
+  $("#igp").href=L.instagram;
+  const sl=[...document.querySelectorAll(".sl")],dt=[...document.querySelectorAll("#dts i")];
+  let i=0,t,x0=0;const calm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const go=n=>{i=(n+SL.length)%SL.length;sl.forEach((e,k)=>e.classList.toggle("on",k===i));dt.forEach((e,k)=>e.classList.toggle("on",k===i))};
+  const play=()=>{clearInterval(t);if(!calm&&SL.length>1)t=setInterval(()=>go(i+1),5500)};
+  $("#bL").onclick=()=>{go(i-1);play()};$("#bR").onclick=()=>{go(i+1);play()};
+  $("#dts").onclick=e=>{if(e.target.dataset.k){go(+e.target.dataset.k);play()}};
+  const bn=$("#bn0");bn.onmouseenter=()=>clearInterval(t);bn.onmouseleave=play;
+  bn.addEventListener("touchstart",e=>{x0=e.touches[0].clientX;clearInterval(t)},{passive:true});
+  bn.addEventListener("touchend",e=>{const d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>40)go(i+(d<0?1:-1));play()},{passive:true});
+  $("#sls").onclick=e=>{const s=e.target.closest(".sl");if(!s)return;F.cat=s.dataset.cat;F.fav=false;montarMenu();lista();$("#pecas").scrollIntoView({behavior:"smooth"})};
+  play();
+})();
+/* setas das categorias */
+$("#cL").onclick=()=>$("#cs").scrollBy({left:-260,behavior:"smooth"});
+$("#cR").onclick=()=>$("#cs").scrollBy({left:260,behavior:"smooth"});
+/* cookies + WhatsApp flutuante */
+$("#wf").href=zapUrl();
+try{if(!localStorage.getItem("elg_ck"))$("#ck").hidden=false}catch(e){}
+$("#ckb").onclick=()=>{$("#ck").hidden=true;try{localStorage.setItem("elg_ck","1")}catch(e){}};
+
+$("#cbf").onclick=()=>abrir(true);
+{const h=location.hash.match(/^#produto-(.+)$/);if(h&&find(h[1]))produto(h[1])}
+addEventListener("hashchange",()=>{const h=location.hash.match(/^#produto-(.+)$/);if(h&&find(h[1])&&pm.id!==h[1])produto(h[1])});
+
+/* avaliações e perguntas */
+const API="/.netlify/functions/feedback";
+const esc=x=>String(x==null?"":x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const estrelas=n=>"★".repeat(Math.round(n))+"☆".repeat(5-Math.round(n));
+const dtb=x=>{const d=new Date(x);return isNaN(d)?"":d.toLocaleDateString("pt-BR")};
+async function fb(a,corpo){
+  const r=corpo?await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({a,...corpo})}):await fetch(`${API}?a=${a}&produto=${encodeURIComponent(pm.id)}`);
+  let j={};try{j=await r.json()}catch(e){}if(!r.ok)throw new Error(j.erro||"indisponível");return j;
+}
+async function carregarFeedback(){const id=pm.id;let j=null;try{j=await fb("lista")}catch(e){}if(pm.id===id)pintarFeedback(j)}
+function pintarFeedback(j){
+  if(!$("#ql"))return;
+  if(!j){const m='<p class="mut">Disponível quando a loja estiver no ar com as funções ativas. Enquanto isso, fale com a gente pelo WhatsApp.</p>';$("#ql").innerHTML=m;$("#avl").innerHTML=m;return}
+  $("#ql").innerHTML=j.perguntas.length?j.perguntas.map(q=>`<div class="qi"><b>${esc(q.nome)}</b> <small>${dtb(q.data)}</small><br>${esc(q.texto)}<div class="rs"><b>El Glamour:</b> ${esc(q.resposta)}</div></div>`).join(""):'<p class="mut">Ainda não há perguntas respondidas para esta peça. Seja a primeira a perguntar!</p>';
+  const av=j.avaliacoes,n=av.length,m=n?av.reduce((s,x)=>s+x.nota,0)/n:0;
+  $("#avm").textContent=m.toFixed(1).replace(".",",");$("#avs").textContent=estrelas(m);$("#avn").textContent=`${n} ${n===1?"avaliação":"avaliações"}`;
+  $("#avb").innerHTML=[5,4,3,2,1].map(k=>{const c=av.filter(x=>x.nota===k).length;return `<div class="br2"><span>${k}★</span><i><s style="width:${n?c/n*100:0}%"></s></i><span>${c}</span></div>`}).join("");
+  $("#avl").innerHTML=n?av.map(x=>`<div class="rv"><div class="hd2"><b>${esc(x.nome)}</b><span>${esc(x.cidade)}</span><span class="stars">${estrelas(x.nota)}</span>${x.verificado?'<span class="vf">✓ Compra verificada</span>':""}<small>${dtb(x.data)}</small></div>${esc(x.texto)}</div>`).join(""):'<p class="mut">Ainda não há avaliações. Comprou esta peça? Conte para as outras clientes!</p>';
+}
+async function enviarPergunta(){
+  const nome=$("#qn").value.trim(),texto=$("#qt").value.trim();
+  if(nome.length<2||texto.length<8){toast("Escreva seu nome e a pergunta com mais detalhes");return}
+  try{await fb("perguntar",{produto:pm.id,nome,texto,site:$("#qs").value});$("#qt").value="";toast("Pergunta enviada! Ela aparece aqui assim que a loja responder 💗",4500)}
+  catch(e){toast(e.message==="indisponível"?"Não foi possível enviar agora. Chame no WhatsApp 💬":e.message)}
+}
+async function enviarAvaliacao(){
+  const g=i=>$("#"+i).value.trim(),nota=pm.nota||0;
+  if(g("rn").length<2||g("rc").length<2||nota<1||g("rt").length<10){toast("Escolha a nota e preencha nome, cidade e comentário");return}
+  try{
+    const j=await fb("avaliar",{produto:pm.id,nome:g("rn"),cidade:g("rc"),nota,texto:g("rt"),pedido:g("rp"),tel:g("rw"),site:$("#rs").value});
+    toast(j.publicada?"Avaliação publicada! Obrigada 💖":"Recebemos sua avaliação! Ela aparece após a conferência da loja 💗",4500);
+    $("#rf").hidden=true;pm.nota=0;carregarFeedback();
+  }catch(e){toast(e.message==="indisponível"?"Não foi possível enviar agora. Tente de novo mais tarde 💗":e.message)}
+}
+function abrirAval(){
+  const f=$("#rf");f.hidden=!f.hidden;if(f.hidden)return;
+  try{const o=JSON.parse(localStorage.getItem("elg_ped")||"null");if(o){if(!$("#rp").value)$("#rp").value=o.pedido||"";if(!$("#rw").value)$("#rw").value=o.tel||""}}catch(e){}
+}
+document.addEventListener("click",e=>{
+  const t=e.target;if(!pm.id||!$("#mc").contains(t))return;
+  if(t.closest("[data-ask]"))enviarPergunta();
+  else if(t.closest("[data-rev]"))abrirAval();
+  else if(t.closest("[data-send]"))enviarAvaliacao();
+  else if(t.dataset.star){pm.nota=+t.dataset.star;document.querySelectorAll("#stp button").forEach((b,k)=>b.classList.toggle("on",k<pm.nota))}
+  else if(t.closest("[data-sc]"))$("#cj2").scrollBy({left:160*(+t.closest("[data-sc]").dataset.sc),behavior:"smooth"});
+});
+fetch(API+"?a=resumo").then(r=>r.ok?r.json():null).then(j=>{if(j&&j.resumo){RES=j.resumo;lista()}}).catch(()=>{});
+
+/* frete estimado (quando as funções não estão ativas) */
+const REG={AC:"N",AM:"N",AP:"N",PA:"N",RO:"N",RR:"N",TO:"N",AL:"NE",BA:"NE",CE:"NE",MA:"NE",PB:"NE",PE:"NE",PI:"NE",RN:"NE",SE:"NE",DF:"CO",GO:"CO",MS:"CO",MT:"CO",ES:"SE",MG:"SE",RJ:"SE",SP:"SE",PR:"S",RS:"S",SC:"S"};
+const EST={N:[22,6],NE:[28,8],CO:[30,8],SE:[32,7],S:[36,9]};
+const estimar=(u,q)=>{const [v,d]=EST[REG[u]||"SE"];return {id:"estimado",nome:"Envio",preco:+(v+4*(Math.max(1,q)-1)).toFixed(2),prazo:d,estimado:true}};
+
+/* letreiro do topo em carrossel */
+(function(){
+  const MSG=L.avisos&&L.avisos.length?L.avisos:["Bem-vindas à El Glamour! Se tiver dúvidas, chame a gente no WhatsApp! 💬"];
+  const bm=$("#bm");let i=0,t;
+  const show=n=>{i=(n+MSG.length)%MSG.length;const m=MSG[i];bm.classList.remove("in");void bm.offsetWidth;
+    bm.innerHTML=/whatsapp/i.test(m)?`<a href="${zapUrl()}" target="_blank" rel="noopener">${m}</a>`:m;bm.classList.add("in")};
+  const play=()=>{clearInterval(t);if(MSG.length>1&&!matchMedia("(prefers-reduced-motion: reduce)").matches)t=setInterval(()=>show(i+1),4500)};
+  $("#bbL").onclick=()=>{show(i-1);play()};$("#bbR").onclick=()=>{show(i+1);play()};
+  if(MSG.length<2){$("#bbL").hidden=$("#bbR").hidden=true}
+  show(0);play();
+})();
+</script>
+</body>
+</html>
