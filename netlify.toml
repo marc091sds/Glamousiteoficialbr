@@ -1,5 +1,7 @@
 [build]
   publish = "."
+  # Os arquivos estão soltos na raiz do GitHub; este comando monta as pastas que as funções precisam.
+  command = "mkdir -p netlify/functions netlify/lib && cp feedback.js frete.js pagamento.js netlify/functions/ && cp comum.js dados.js netlify/lib/"
 
 [functions]
   directory = "netlify/functions"
