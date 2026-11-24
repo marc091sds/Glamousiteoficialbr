@@ -27,7 +27,7 @@ async function compraVerificada(pedido, tel, produto) {
 }
 
 function senhaOk(s) {
-  const a = Buffer.from(String(s || "")), b = Buffer.from(String(process.env.ADMIN_SENHA || ""));
+  const a = Buffer.from(String(s || "").trim()), b = Buffer.from(String(process.env.ADMIN_SENHA || "").trim());
   return b.length > 0 && a.length === b.length && crypto.timingSafeEqual(a, b);
 }
 
