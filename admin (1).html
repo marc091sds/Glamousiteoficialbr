@@ -66,6 +66,8 @@ const SLIDES0=[
  {id:"pijama-panda",a:"FOFURA",as:"PIJAMAS E\nMACAQUINHOS",b:"CHARME",bs:"CONFORTO\nDE SOBRA",c:"pijamas"},
  {id:"conjunto-vermelho-halter",a:"BRILHE",as:"CONJUNTOS PARA\nARRASAR",b:"SEMPRE",bs:"PEÇAS QUE FAZEM\nVOCÊ BRILHAR",c:"conjuntos"}];
 
+const TAGS=[["destaque","⭐ Destaque"],["oferta","🏷️ Oferta"],["vendido","🔥 Mais vendido"],["lancamento","✨ Lançamento"],["ultimas","⏳ Últimas unidades"],["exclusivo","💎 Exclusivo"]];
+const tagNome=k=>(TAGS.find(t=>t[0]===k)||[])[1]||k;
 let senha="",cfg=null,aba="produtos",sujo=false,aberto=null,busca="",FBD=null,ocupado=false;
 
 /* ---------- utilidades ---------- */
@@ -133,7 +135,7 @@ async function importar(){
     }
     const fila=[...todas];await Promise.all([0,1,2,3].map(async()=>{while(fila.length)await up(fila.shift())}));
     const produtos=C.produtos.map(x=>({id:x.id,categoria:x.categoria,nome:x.nome,preco:x.preco,tamanhos:x.tamanhos,desc:x.desc,rotulo:x.rotulo,hero:x.hero,
-      fotos:x.fotos.map(f=>cache[f]||f),peso:x.peso,largura:x.largura,altura:x.altura,comprimento:x.comprimento}));
+      tags:x.hero?["destaque"]:[],fotos:x.fotos.map(f=>cache[f]||f),peso:x.peso,largura:x.largura,altura:x.altura,comprimento:x.comprimento}));
     const L=C.loja;
     const nova={loja:{nome:L.nome,nomeLogo:"EL GLAMOUR",sub1:"MODA FEMININA",sub2:"VARIEDADES",tituloSite:"El Glamour | Moda Feminina · Variedades — Loja online",
       whats:L.whats,instagram:L.instagram,bio:L.bio,facebook:"",tiktok:"",youtube:"",cidadeLoja:L.cidadeLoja,cidadesMoto:L.cidadesMoto,avisos:L.avisos,logo:"",
@@ -156,14 +158,14 @@ $("#pub").onclick=async()=>{
 };
 
 /* ---------- abas ---------- */
-const ABAS=[["produtos","Produtos"],["categorias","Categorias"],["loja","Loja e contato"],["visual","Cores e logo"],["textos","Textos e banners"],["fb","Avaliações e perguntas"]];
+const ABAS=[["produtos","Produtos"],["categorias","Categorias"],["loja","Loja e contato"],["visual","Cores e logo"],["banners","Banners"],["textos","Textos"],["fb","Avaliações e perguntas"]];
 function desenhar(){
   $("#tabs").innerHTML=ABAS.map(([k,n])=>`<button class="${aba===k?"on":""}" data-aba="${k}">${n}</button>`).join("");
   const v=$("#view");
   if(aba==="fb"){v.innerHTML='<p>Carregando…</p>';carregarFb();return}
   if(!cfg){v.innerHTML=`<div class="c"><h1>Primeiro acesso</h1><p>Vou copiar os produtos, fotos e textos que já estão no seu site para este painel. O site continua igual — depois disso você edita tudo por aqui.</p>
     <button id="imp" data-imp="1">Importar dados do site</button> <p id="prog"></p></div>`;return}
-  v.innerHTML={produtos:telaProdutos,categorias:telaCategorias,loja:telaLoja,visual:telaVisual,textos:telaTextos}[aba]();
+  v.innerHTML={produtos:telaProdutos,categorias:telaCategorias,loja:telaLoja,visual:telaVisual,banners:telaBanners,textos:telaTextos}[aba]();
 }
 $("#tabs").onclick=e=>{const b=e.target.closest("[data-aba]");if(b){aba=b.dataset.aba;desenhar()}};
 
@@ -180,12 +182,18 @@ function cardProduto(p,i){
   return `<div class="c" data-card="${i}"><div class="pr"><img src="${esc((p.fotos||[])[0]||"")}" alt=""><div class="i"><b>${esc(p.nome||"(sem nome)")}</b>
    <small>R$ ${Number(p.preco||0).toFixed(2).replace(".",",")} · ${esc((cfg.categorias.find(c=>c.id===p.categoria)||{}).nome||"sem categoria")} ${p.ativo===false?'· <b style="color:#b3123f">OCULTO</b>':""} ${!(p.fotos||[]).length?'· <b style="color:#b3123f">SEM FOTO</b>':""}</small></div>
    <button class="s o" data-up="${i}" title="Subir">↑</button><button class="s o" data-down="${i}" title="Descer">↓</button><button class="s" data-edit="${p.id}">${ab?"Fechar":"Editar"}</button></div>
+  <div class="r" style="margin-top:8px"><button class="s ${(p.tags||[]).includes("destaque")?"":"o"}" data-pstar="${i}">${(p.tags||[]).includes("destaque")?"⭐ Em destaque":"☆ Destacar"}</button><button class="s o" data-pvis="${i}">${p.ativo===false?"👁 Mostrar no site":"🙈 Ocultar"}</button><button class="s o" data-del="${i}">🗑 Remover</button>
+   ${(p.tags||[]).filter(t=>t!=="destaque").map(t=>`<span class="tg">${esc(tagNome(t))}</span>`).join("")}</div>
   ${ab?`<div style="margin-top:10px">
    <label>Nome</label><input data-pi="${i}" data-f="nome" value="${esc(p.nome)}">
    <div class="g2"><div><label>Preço (R$)</label><input data-pi="${i}" data-f="preco" data-t="num" inputmode="decimal" value="${esc(String(p.preco??"").replace(".",","))}"></div>
    <div><label>Categoria</label><select data-pi="${i}" data-f="categoria"><option value="">— escolha —</option>${cats}</select></div></div>
    <label>Tamanhos / opções <small>(separe por vírgula. Ex.: P, M, G)</small></label><input data-pi="${i}" data-f="tamanhos" data-t="lista" value="${esc((p.tamanhos||[]).join(", "))}">
    <label>Nome da escolha <small>(Tamanho, Modelo, Cor… deixe vazio para "Tamanho")</small></label><input data-pi="${i}" data-f="rotulo" value="${esc(p.rotulo||"")}">
+   <label>Etiquetas <small>(aparecem na foto da peça e viram filtros no site)</small></label>
+   <div class="r">${TAGS.map(([k,n])=>`<label class="chk" style="margin:0 12px 0 0"><input type="checkbox" data-tag="${i}:${k}" ${(p.tags||[]).includes(k)?"checked":""}> ${n}</label>`).join("")}</div>
+   <div class="g2"><div><label>Preço antigo "de" (R$) <small>(para Oferta: aparece riscado)</small></label><input data-pi="${i}" data-f="precoAntigo" data-t="num" inputmode="decimal" placeholder="ex.: 129,90" value="${p.precoAntigo?esc(String(p.precoAntigo).replace(".",",")):""}"></div>
+   <div><label>Etiqueta própria <small>(ex.: Black Friday)</small></label><input data-pi="${i}" data-f="etiqueta" value="${esc(p.etiqueta||"")}"></div></div>
    <label>Descrição</label><textarea data-pi="${i}" data-f="desc" rows="5">${esc(p.desc)}</textarea>
    <label>Fotos <small>(a primeira é a principal)</small></label>
    <div class="fotos">${(p.fotos||[]).map((f,k)=>`<div class="ft"><img src="${esc(f)}" alt=""><div><button class="s o" data-fm="${i}:${k}:-1">◀</button><button class="s o" data-fm="${i}:${k}:1">▶</button><button class="s r" data-fx="${i}:${k}">✕</button></div></div>`).join("")}
@@ -196,11 +204,11 @@ function cardProduto(p,i){
    <div><label>Largura (cm)</label><input data-pi="${i}" data-f="largura" data-t="num" value="${esc(String(p.largura??20).replace(".",","))}"></div>
    <div><label>Altura (cm)</label><input data-pi="${i}" data-f="altura" data-t="num" value="${esc(String(p.altura??5).replace(".",","))}"></div>
    <div><label>Comprim. (cm)</label><input data-pi="${i}" data-f="comprimento" data-t="num" value="${esc(String(p.comprimento??25).replace(".",","))}"></div></div>
-   <div class="r"><button class="o s" data-dup="${i}">Duplicar</button><button class="r s" data-del="${i}">Excluir produto</button></div></div>`:""}</div>`;
+   <div class="r"><button class="o s" data-dup="${i}">Duplicar</button></div></div>`:""}</div>`;
 }
 function novoProduto(){
   const id="peca-"+Date.now().toString(36);
-  cfg.produtos.unshift({id,categoria:(cfg.categorias[0]||{}).id||"",nome:"Novo produto",preco:0,tamanhos:["P","M","G"],desc:"",fotos:[],peso:0.3,largura:20,altura:5,comprimento:25});
+  cfg.produtos.unshift({id,categoria:(cfg.categorias[0]||{}).id||"",nome:"Novo produto",preco:0,tamanhos:["P","M","G"],tags:[],desc:"",fotos:[],peso:0.3,largura:20,altura:5,comprimento:25});
   aberto=id;marcar();desenhar();
 }
 
@@ -208,7 +216,7 @@ function novoProduto(){
 function telaCategorias(){
   return `<h1>Categorias</h1><p>Aparecem no menu e nos círculos do site (só as que têm produtos).</p>`+
   cfg.categorias.map((c,i)=>{const n=cfg.produtos.filter(p=>p.categoria===c.id).length;
-   return `<div class="c"><div class="pr"><input data-ci="${i}" value="${esc(c.nome)}"><small>${n} peça(s)</small><button class="s o" data-cup="${i}">↑</button><button class="s o" data-cdown="${i}">↓</button><button class="s r" data-cdel="${i}">✕</button></div></div>`}).join("")+
+   return `<div class="c"><div class="pr"><input data-ci="${i}" value="${esc(c.nome)}"><small>${n} peça(s)${c.ativo===false?" · <b style=\"color:#b3123f\">OCULTA</b>":""}</small></div><div class="r"><button class="s o" data-cfirst="${i}">⭐ Colocar em 1º</button><button class="s o" data-cup="${i}">↑</button><button class="s o" data-cdown="${i}">↓</button><button class="s o" data-cvis="${i}">${c.ativo===false?"👁 Mostrar":"🙈 Ocultar"}</button><button class="s r" data-cdel="${i}">🗑 Remover</button></div></div>`}).join("")+
   `<div class="r"><input id="ncat" placeholder="Nome da nova categoria" style="flex:1"><button data-cadd="1">+ Adicionar</button></div>`;
 }
 
@@ -254,17 +262,25 @@ function telaTextos(){
   <div class="c"><h3>Letreiro do topo</h3><label>Uma frase por linha <small>(frases com "WhatsApp" viram link)</small></label>
    <textarea data-b="loja.avisos" data-t="linhas" rows="5">${esc((L.avisos||[]).join("\n"))}</textarea></div>
   <div class="c"><h3>Os 4 quadros abaixo do banner</h3>${b.map((x,i)=>`<div class="g3" style="grid-template-columns:70px 1fr 2fr"><div><label>Ícone</label><input data-b="loja.beneficios.${i}.i" value="${esc(x.i)}"></div><div><label>Título</label><input data-b="loja.beneficios.${i}.t" value="${esc(x.t)}"></div><div><label>Texto</label><input data-b="loja.beneficios.${i}.d" value="${esc(x.d)}"></div></div>`).join("")}</div>
-  <div class="c"><h3>Rodapé</h3>${campo("Linha de endereço/envio","loja.rodape")}${campo("Direitos reservados","loja.copyright")}</div>
-  <div class="c"><h3>Banners grandes (carrossel)</h3>
-   ${(cfg.slides||[]).map((s,i)=>`<div class="c" style="background:#fff8fa"><div class="g2">
-     <div><label>Peça da foto</label><select data-si="${i}" data-f="id"><option value="">— usar foto própria —</option>${prods.replace(`value="${esc(s.id)}"`,`value="${esc(s.id)}" selected`)}</select></div>
-     <div><label>Ao clicar, abrir</label><select data-si="${i}" data-f="c">${cats.replace(`value="${esc(s.c||"todos")}"`,`value="${esc(s.c||"todos")}" selected`)}</select></div></div>
-     ${s.img?`<img class="logo" src="${esc(s.img)}" alt="" style="max-height:80px">`:""}
-     <div class="r"><label class="s" style="background:var(--soft);color:var(--deep);padding:5px 10px;border-radius:10px;cursor:pointer;margin:0">Enviar foto própria<input type="file" accept="image/*" hidden data-simg="${i}"></label>${s.img?`<button class="o s" data-simg-x="${i}">Remover foto própria</button>`:""}</div>
-     <div class="g2"><div><label>Texto grande (esquerda)</label><input data-si="${i}" data-f="a" value="${esc(s.a)}"></div><div><label>Texto grande (direita)</label><input data-si="${i}" data-f="b" value="${esc(s.b)}"></div>
-     <div><label>Subtexto esquerda</label><textarea data-si="${i}" data-f="as" rows="2">${esc(s.as)}</textarea></div><div><label>Subtexto direita</label><textarea data-si="${i}" data-f="bs" rows="2">${esc(s.bs)}</textarea></div></div>
-     <div class="r"><button class="s o" data-sup="${i}">↑</button><button class="s o" data-sdown="${i}">↓</button><button class="s r" data-sdel="${i}">Remover banner</button></div></div>`).join("")}
-   <button class="s" data-sadd="1" ${(cfg.slides||[]).length>=6?"disabled":""}>+ Novo banner</button></div>`;
+  <div class="c"><h3>Rodapé</h3>${campo("Linha de endereço/envio","loja.rodape")}${campo("Direitos reservados","loja.copyright")}</div>`;
+}
+
+/* ---------- banners ---------- */
+function telaBanners(){
+  const prods=cfg.produtos.map(p=>`<option value="${esc(p.id)}">${esc(p.nome)}</option>`).join("");
+  const cats=`<option value="todos">Todas as peças</option>`+cfg.categorias.map(c=>`<option value="${esc(c.id)}">${esc(c.nome)}</option>`).join("");
+  const S=cfg.slides||[],cheio=S.length>=8;
+  return `<h1>Banners <small>(${S.length})</small></h1>
+  <p>São as imagens grandes que passam no topo da loja. Para um banner <b>só com foto</b>, deixe os textos vazios. Tamanho ideal: 1600 × 600 px (deitada).</p>
+  <div class="r"><label class="s" style="background:var(--deep);color:#fff;padding:10px 16px;border-radius:10px;cursor:pointer;margin:0;${cheio?"opacity:.5;pointer-events:none":""}">+ Banner com foto<input type="file" accept="image/*" hidden data-snew="1"></label>
+   <button class="o" data-sadd="1" ${cheio?"disabled":""}>+ Banner com texto e peça</button></div><div style="height:10px"></div>`+
+  S.map((s,i)=>`<div class="c" ${s.ativo===false?'style="opacity:.7"':""}><div class="pr"><img src="${esc(s.img||((cfg.produtos.find(p=>p.id===s.id)||{}).fotos||[])[0]||"")}" alt="" style="width:110px;height:56px"><div class="i"><b>${i===0?"⭐ ":""}Banner ${i+1}${s.ativo===false?' <span style="color:#b3123f">(OCULTO)</span>':""}</b><small>${(s.a||s.as||s.b||s.bs)?"com texto":"só foto"}</small></div></div>
+   <div class="r"><button class="s o" data-sfirst="${i}">⭐ Colocar em 1º</button><button class="s o" data-sup="${i}">↑</button><button class="s o" data-sdown="${i}">↓</button><button class="s o" data-svis="${i}">${s.ativo===false?"👁 Mostrar":"🙈 Ocultar"}</button><button class="s r" data-sdel="${i}">🗑 Remover</button></div>
+   <div class="g2"><div><label>Foto de uma peça</label><select data-si="${i}" data-f="id"><option value="">— usar foto própria —</option>${prods.replace(`value="${esc(s.id)}"`,`value="${esc(s.id)}" selected`)}</select></div>
+   <div><label>Ao clicar, abrir</label><select data-si="${i}" data-f="c">${cats.replace(`value="${esc(s.c||"todos")}"`,`value="${esc(s.c||"todos")}" selected`)}</select></div></div>
+   <div class="r"><label class="s" style="background:var(--soft);color:var(--deep);padding:5px 10px;border-radius:10px;cursor:pointer;margin:0">${s.img?"Trocar foto":"Enviar foto própria"}<input type="file" accept="image/*" hidden data-simg="${i}"></label>${s.img?`<button class="o s" data-simg-x="${i}">Remover foto própria</button>`:""}</div>
+   <div class="g2"><div><label>Texto grande (esquerda)</label><input data-si="${i}" data-f="a" value="${esc(s.a)}"></div><div><label>Texto grande (direita)</label><input data-si="${i}" data-f="b" value="${esc(s.b)}"></div>
+   <div><label>Subtexto esquerda</label><textarea data-si="${i}" data-f="as" rows="2">${esc(s.as)}</textarea></div><div><label>Subtexto direita</label><textarea data-si="${i}" data-f="bs" rows="2">${esc(s.bs)}</textarea></div></div></div>`).join("")||"<p>Nenhum banner. Adicione um acima.</p>";
 }
 
 /* ---------- avaliações e perguntas ---------- */
@@ -299,6 +315,10 @@ V.addEventListener("change",async e=>{
   if(t.dataset.pi!=null&&t.tagName==="SELECT"){cfg.produtos[+t.dataset.pi][t.dataset.f]=t.value;marcar();return}
   if(t.dataset.si!=null&&t.tagName==="SELECT"){cfg.slides[+t.dataset.si][t.dataset.f]=t.value;marcar();return}
   if(t.dataset.cor){cfg.cores[t.dataset.cor]=t.value;marcar();t.closest(".c").querySelector(".prev").innerHTML=["deep","pink","soft","rose","ink","bg"].map(k=>`<i style="background:${cfg.cores[k]||COR0[k]}"></i>`).join("");return}
+  if(t.dataset.tag){const[i,k]=t.dataset.tag.split(":");const p=cfg.produtos[+i];p.tags=p.tags||[];
+    if(t.checked){if(!p.tags.includes(k))p.tags.push(k)}else p.tags=p.tags.filter(x=>x!==k);marcar();return}
+  if(t.dataset.snew){const f=t.files[0];if(!f)return;aviso("Enviando banner…",60000);
+    try{const img=await enviarFoto(f,1600);cfg.slides.push({id:"",img,a:"",as:"",b:"",bs:"",c:"todos"});marcar();aviso("Banner adicionado ✓ Clique em \"Publicar alterações\".");desenhar()}catch(err){aviso("Erro ao enviar: "+err.message,6000)}return}
   if(t.dataset.fadd!=null||t.dataset.simg!=null||t.id==="logoUp"){
     const arqs=[...t.files];if(!arqs.length)return;aviso("Enviando imagem…",60000);
     try{
@@ -317,7 +337,7 @@ V.addEventListener("click",async e=>{
   if(d.edit){aberto=aberto===d.edit?null:d.edit;desenhar();return}
   if(d.up!=null){if(mover(cfg.produtos,+d.up,-1)){marcar();desenhar()}return}
   if(d.down!=null){if(mover(cfg.produtos,+d.down,1)){marcar();desenhar()}return}
-  if(d.del!=null){if(confirm("Excluir este produto?")){cfg.produtos.splice(+d.del,1);aberto=null;marcar();desenhar()}return}
+  if(d.del!=null){if(confirm("Remover este produto do site? (para só esconder, use Ocultar)")){cfg.produtos.splice(+d.del,1);aberto=null;marcar();desenhar()}return}
   if(d.dup!=null){const p=JSON.parse(JSON.stringify(cfg.produtos[+d.dup]));p.id="peca-"+Date.now().toString(36);p.nome+=" (cópia)";cfg.produtos.splice(+d.dup+1,0,p);aberto=p.id;marcar();desenhar();return}
   if(d.fx){const[i,k]=d.fx.split(":").map(Number);cfg.produtos[i].fotos.splice(k,1);marcar();desenhar();return}
   if(d.fm){const[i,k,s]=d.fm.split(":").map(Number);if(mover(cfg.produtos[i].fotos,k,s)){marcar();desenhar()}return}
@@ -325,6 +345,12 @@ V.addEventListener("click",async e=>{
   if(d.cdown!=null){if(mover(cfg.categorias,+d.cdown,1)){marcar();desenhar()}return}
   if(d.cdel!=null){const c=cfg.categorias[+d.cdel],n=cfg.produtos.filter(p=>p.categoria===c.id).length;
     if(confirm(n?`Há ${n} peça(s) nesta categoria; elas ficarão sem categoria. Excluir mesmo assim?`:"Excluir esta categoria?")){cfg.categorias.splice(+d.cdel,1);marcar();desenhar()}return}
+  if(d.pstar!=null){const p=cfg.produtos[+d.pstar];p.tags=p.tags||[];p.tags=p.tags.includes("destaque")?p.tags.filter(x=>x!=="destaque"):[...p.tags,"destaque"];marcar();desenhar();return}
+  if(d.pvis!=null){const p=cfg.produtos[+d.pvis];if(p.ativo===false)delete p.ativo;else p.ativo=false;marcar();desenhar();return}
+  if(d.cvis!=null){const c=cfg.categorias[+d.cvis];if(c.ativo===false)delete c.ativo;else c.ativo=false;marcar();desenhar();return}
+  if(d.cfirst!=null){cfg.categorias.unshift(...cfg.categorias.splice(+d.cfirst,1));marcar();desenhar();return}
+  if(d.svis!=null){const c=cfg.slides[+d.svis];if(c.ativo===false)delete c.ativo;else c.ativo=false;marcar();desenhar();return}
+  if(d.sfirst!=null){cfg.slides.unshift(...cfg.slides.splice(+d.sfirst,1));marcar();desenhar();return}
   if(d.cadd){const nome=$("#ncat").value.trim();if(!nome)return;let id=slug(nome),n=1;while(cfg.categorias.some(c=>c.id===id))id=slug(nome)+"-"+(++n);cfg.categorias.push({id,nome});marcar();desenhar();return}
   if(d.logoX){cfg.loja.logo="";marcar();desenhar();return}
   if(d.corReset){cfg.cores={};marcar();desenhar();return}
