@@ -1,11 +1,12 @@
 // Cria o pagamento no Mercado Pago (Checkout Pro) e devolve o link para o cliente pagar.
 // Os PREÇOS e o FRETE são recalculados aqui no servidor — o navegador não decide valores.
-const { CAT, norm, montarItens, viacep, cotar } = require("../lib/comum");
+const { CAT, norm, montarItens, viacep, cotar, sincronizar } = require("../lib/comum");
 
 exports.handler = async (event) => {
   const h = { "Content-Type": "application/json" };
   const erro = (c, m) => ({ statusCode: c, headers: h, body: JSON.stringify({ erro: m }) });
   try {
+    await sincronizar(event);
     if (!process.env.MP_ACCESS_TOKEN) return erro(503, "Pagamento online ainda não configurado.");
     const { cliente = {}, endereco = {}, itens, entrega = {} } = JSON.parse(event.body || "{}");
     const cep = String(endereco.cep || "").replace(/\D/g, "");

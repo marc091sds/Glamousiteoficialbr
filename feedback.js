@@ -4,7 +4,7 @@
 //  POST {a:"avaliar"|"perguntar"|"adm_lista"|"adm_acao", ...}
 const crypto = require("crypto");
 const { abrir } = require("../lib/dados");
-const { CAT } = require("../lib/comum");
+const { CAT, sincronizar } = require("../lib/comum");
 
 const J = (c, o) => ({ statusCode: c, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }, body: JSON.stringify(o) });
 const limpa = (s, n) => String(s || "").replace(/[\u0000-\u001f<>]/g, " ").replace(/\s+/g, " ").trim().slice(0, n);
@@ -33,6 +33,7 @@ function senhaOk(s) {
 
 exports.handler = async (event) => {
   try {
+    await sincronizar(event);
     const db = await abrir(event);
     if (event.httpMethod === "GET") {
       const q = event.queryStringParameters || {};

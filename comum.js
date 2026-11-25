@@ -7,6 +7,23 @@ const REGIAO = { AC:"N",AM:"N",AP:"N",PA:"N",RO:"N",RR:"N",TO:"N",
 // [valor base, prazo em dias úteis] — usado só como ESTIMATIVA quando o Melhor Envio não está configurado
 const ESTIMATIVA = { N:[22,6], NE:[28,8], CO:[30,8], SE:[32,7], S:[36,9] };
 
+// Cópia do catálogo original (arquivo catalogo.js), usada quando o painel ainda não salvou nada.
+const BASE = JSON.parse(JSON.stringify({ produtos: CAT.produtos, loja: CAT.loja, categorias: CAT.categorias }));
+
+// Atualiza CAT (preços, peças, dimensões, cidades de moto) com o que foi salvo no painel.
+// Se algo falhar, continua com o catálogo original — nunca derruba o site.
+async function sincronizar(event) {
+  try {
+    const { abrir } = require("./dados");
+    const c = await (await abrir(event)).get("config");
+    const ok = c && !Array.isArray(c) && Array.isArray(c.produtos);
+    const prod = ok ? c.produtos.filter(p => p && p.ativo !== false && p.id && isFinite(p.preco)) : BASE.produtos;
+    CAT.produtos.splice(0, CAT.produtos.length, ...prod.map(p => ({ peso: 0.3, largura: 20, altura: 5, comprimento: 25, ...p })));
+    const cm = ok && c.loja && Array.isArray(c.loja.cidadesMoto) ? c.loja.cidadesMoto : BASE.loja.cidadesMoto;
+    CAT.loja.cidadesMoto = cm;
+  } catch (e) {}
+}
+
 const norm = s => (s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 
 function montarItens(itens) {
@@ -59,4 +76,4 @@ async function cotar(cep, itens) {
   return [{ id: "estimado", nome: "Envio", preco: +(valor + 4 * (qtdTotal - 1)).toFixed(2), prazo, estimado: true }];
 }
 
-module.exports = { CAT, norm, montarItens, viacep, cotar };
+module.exports = { CAT, norm, montarItens, viacep, cotar, sincronizar };

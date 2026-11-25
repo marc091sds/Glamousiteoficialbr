@@ -1,9 +1,10 @@
 // POST { cep, itens:[{id,qtd}] }  ->  { opcoes:[{id,nome,preco,prazo,estimado}] }
-const { cotar } = require("../lib/comum");
+const { cotar, sincronizar } = require("../lib/comum");
 
 exports.handler = async (event) => {
   const h = { "Content-Type": "application/json" };
   try {
+    await sincronizar(event);
     const { cep, itens } = JSON.parse(event.body || "{}");
     const c = String(cep || "").replace(/\D/g, "");
     if (c.length !== 8) throw new Error("CEP inválido.");

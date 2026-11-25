@@ -8,4 +8,13 @@ async function abrir(event) {
   const st = getStore("el-glamour-feedback");
   return { get: async k => (await st.get(k, { type: "json" })) || [], set: (k, v) => st.setJSON(k, v) };
 }
-module.exports = { abrir };
+// Imagens enviadas pelo painel (guardadas como texto "data:image/...;base64,...")
+const memImg = {};
+async function abrirImg(event) {
+  if (process.env.DADOS_MEM) return { get: async k => memImg[k] || null, set: async (k, v) => { memImg[k] = v; } };
+  const { getStore, connectLambda } = require("@netlify/blobs");
+  try { connectLambda(event); } catch (e) {}
+  const st = getStore("el-glamour-imagens");
+  return { get: async k => (await st.get(k)) || null, set: (k, v) => st.set(k, v) };
+}
+module.exports = { abrir, abrirImg };
