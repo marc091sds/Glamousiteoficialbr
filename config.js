@@ -23,6 +23,7 @@ const U = v => { v = String(v || "").trim(); return URLOK.test(v) ? v : ""; };
 const HTTPS = v => { v = String(v || "").trim(); return /^https:\/\/[^\s"'<>]{4,300}$/.test(v) ? v : ""; };
 const COR = v => /^#[0-9a-f]{6}$/i.test(String(v || "")) ? String(v).toLowerCase() : "";
 const slug = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
+const TAGS = ["destaque", "oferta", "vendido", "lancamento", "ultimas", "exclusivo"];
 const lista = (v, max, n) => (Array.isArray(v) ? v : []).map(x => S(x, n)).filter(Boolean).slice(0, max);
 
 function limparConfig(c) {
@@ -52,7 +53,7 @@ function limparConfig(c) {
   const ids = new Set();
   out.categorias = (Array.isArray(c.categorias) ? c.categorias : []).slice(0, 40).map(x => {
     const nome = S(x && x.nome, 40), id = slug(x && x.id) || slug(nome);
-    if (!nome || !id || ids.has(id)) return null; ids.add(id); return { id, nome };
+    if (!nome || !id || ids.has(id)) return null; ids.add(id); return x.ativo === false ? { id, nome, ativo: false } : { id, nome };
   }).filter(Boolean);
 
   if (Array.isArray(c.produtos)) {
@@ -71,6 +72,9 @@ function limparConfig(c) {
       if (!o.tamanhos.length) o.tamanhos = ["Único"];
       if (p.rotulo) o.rotulo = S(p.rotulo, 20);
       if (p.hero) o.hero = true;
+      o.tags = (Array.isArray(p.tags) ? p.tags : []).map(t => S(t, 20)).filter((t, k, a) => TAGS.includes(t) && a.indexOf(t) === k);
+      const pa = N(p.precoAntigo, 0, 0, 100000); if (pa > o.preco) o.precoAntigo = +pa.toFixed(2);
+      if (p.etiqueta) o.etiqueta = S(p.etiqueta, 24);
       if (p.ativo === false) o.ativo = false;
       return o;
     }).filter(Boolean);
@@ -78,7 +82,7 @@ function limparConfig(c) {
   if (Array.isArray(c.slides)) {
     out.slides = c.slides.slice(0, 8).map(s => ({
       id: slug(s && s.id), img: U(s && s.img), c: slug(s && s.c) || "todos",
-      a: S(s && s.a, 30), as: SL(s && s.as, 60), b: S(s && s.b, 30), bs: SL(s && s.bs, 60)
+      a: S(s && s.a, 30), as: SL(s && s.as, 60), b: S(s && s.b, 30), bs: SL(s && s.bs, 60), ...(s && s.ativo === false ? { ativo: false } : {})
     })).filter(s => s.id || s.img);
   }
   return out;

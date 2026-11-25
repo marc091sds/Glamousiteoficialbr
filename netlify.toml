@@ -6,3 +6,19 @@
 [functions]
   directory = "netlify/functions"
   included_files = ["catalogo.js"]
+
+# Sempre baixar a versão mais nova do painel e do site (evita ficar preso em versão antiga no navegador)
+[[headers]]
+  for = "/admin.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "no-cache"
