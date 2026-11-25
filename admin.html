@@ -2,26 +2,345 @@
 <html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex"><title>Painel — El Glamour</title>
 <style>
-body{font-family:system-ui,sans-serif;background:#FFF4F7;color:#5E2E41;margin:0;padding:16px;max-width:760px;margin:auto}
-h1{color:#A93C60;font-size:22px}h2{color:#A93C60;font-size:16px;margin:22px 0 8px}
-input,textarea,button{font:inherit}input,textarea{width:100%;padding:10px;border:1.5px solid #f3c2d0;border-radius:10px;box-sizing:border-box}
-button{border:0;border-radius:10px;background:#A93C60;color:#fff;font-weight:700;padding:10px 16px;cursor:pointer}button.o{background:#fff;color:#A93C60;border:1.5px solid #A93C60}
-.c{background:#fff;border-radius:12px;padding:12px;margin-bottom:10px;font-size:14px;line-height:1.45}.c small{opacity:.75}.tg{display:inline-block;background:#FFE3EA;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;margin-right:6px}
-.r{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}#err{color:#b3123f;font-weight:700}
+:root{--deep:#A93C60;--ink:#5E2E41;--soft:#FFE3EA;--line:#f3c2d0;--bg:#FFF4F7}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink);margin:0;padding:0 0 90px}
+h1{color:var(--deep);font-size:22px;margin:0 0 12px}h2{color:var(--deep);font-size:17px;margin:22px 0 8px}h3{font-size:15px;margin:14px 0 6px;color:var(--deep)}
+input,textarea,select,button{font:inherit}
+input[type=text],input[type=number],input[type=password],input:not([type]),textarea,select{width:100%;padding:10px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+textarea{resize:vertical;min-height:70px}
+label{display:block;font-size:12.5px;font-weight:700;margin:10px 0 4px}
+label small{font-weight:400;opacity:.75}
+button{border:0;border-radius:10px;background:var(--deep);color:#fff;font-weight:700;padding:10px 16px;cursor:pointer}
+button.o{background:#fff;color:var(--deep);border:1.5px solid var(--deep)}button.s{padding:6px 10px;font-size:13px}button.r{background:#b3123f}
+button:disabled{opacity:.5;cursor:wait}
+#lg{max-width:420px;margin:60px auto;padding:0 16px}
+.top{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;padding:10px 14px;flex-wrap:wrap}
+.top b{color:var(--deep);flex:1;min-width:140px}.top a{color:var(--deep);font-weight:700;font-size:14px}
+#st{font-size:12px;font-weight:700}#st.d{color:#b3123f}#st.k{color:#1a7f45}
+#tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 14px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:57px;z-index:19}
+#tabs button{background:var(--soft);color:var(--deep);white-space:nowrap}#tabs button.on{background:var(--deep);color:#fff}
+main{max-width:860px;margin:0 auto;padding:14px}
+.c{background:#fff;border-radius:12px;padding:12px;margin-bottom:10px;font-size:14px;line-height:1.45;border:1px solid #f6d3dd}.c small{opacity:.75}
+.tg{display:inline-block;background:var(--soft);border-radius:6px;padding:2px 8px;font-size:11px;font-weight:700;margin-right:6px}
+.r{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:560px){.g2,.g3,.g4{grid-template-columns:1fr 1fr}}
+.pr{display:flex;gap:10px;align-items:center}.pr img{width:56px;height:56px;object-fit:cover;border-radius:10px;background:var(--soft);flex:none}
+.pr .i{flex:1;min-width:0}.pr .i b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fotos{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.ft{width:96px;background:var(--soft);border-radius:10px;padding:4px;text-align:center}.ft img{width:100%;height:96px;object-fit:cover;border-radius:8px;display:block}
+.ft div{display:flex;justify-content:space-between;gap:2px;margin-top:3px}.ft button{padding:2px 7px;font-size:13px;border-radius:6px}
+.cor{display:flex;align-items:center;gap:8px;margin:6px 0}.cor input[type=color]{width:46px;height:38px;padding:0;border:1.5px solid var(--line);border-radius:8px;background:#fff}
+.cor span{flex:1;font-size:13px}
+.prev{display:flex;gap:6px;margin:8px 0}.prev i{flex:1;height:34px;border-radius:8px;border:1px solid #0001}
+.chk{display:flex;gap:8px;align-items:center;font-weight:600;margin:10px 0 0}.chk input{width:auto}
+.logo{max-height:64px;max-width:200px;display:block;margin:6px 0;background:#eee;border-radius:8px;padding:4px}
+.msg{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;z-index:50;max-width:92vw}
+.warn{background:#fff7d6;border:1px solid #f0d46b;border-radius:10px;padding:10px;font-size:13px;margin:8px 0}
+#err{color:#b3123f;font-weight:700}
 </style></head><body>
-<h1>Painel da loja — avaliações e perguntas</h1>
-<div id="lg"><input id="s" type="password" placeholder="Senha do painel"><p><button id="go">Entrar</button> <span id="err"></span></p></div>
-<div id="pn" hidden><h2>Avaliações</h2><div id="av"></div><h2>Perguntas</h2><div id="pe"></div></div>
+
+<div id="lg"><h1>Painel da loja</h1>
+  <input id="s" type="password" placeholder="Senha do painel" autocomplete="current-password">
+  <p><button id="go">Entrar</button> <span id="err"></span></p>
+</div>
+
+<div id="app" hidden>
+  <div class="top"><b>Painel El Glamour</b><span id="st"></span><a href="/" target="_blank" rel="noopener">Ver loja ↗</a><button id="pub">Publicar alterações</button></div>
+  <div id="tabs"></div>
+  <main id="view"></main>
+</div>
+<div class="msg" id="msg" hidden></div>
+
 <script>
-const API="/.netlify/functions/feedback";let senha="";
+const API="/.netlify/functions/config",FB="/.netlify/functions/feedback";
+const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-async function chama(corpo){const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({senha,...corpo})});const t=await r.text();let j;try{j=JSON.parse(t)}catch(e){throw new Error("O servidor não respondeu corretamente (código "+r.status+"). Verifique se as funções foram publicadas no Netlify.")}if(!r.ok)throw new Error(j.erro||"Erro");return j}
-function pinta(j){
-  document.getElementById("av").innerHTML=j.avaliacoes.length?j.avaliacoes.map(x=>`<div class="c"><span class="tg">${x.status==="aprovada"?"Publicada":"Aguardando"}</span>${x.verificado?'<span class="tg">Compra verificada</span>':""}<b>${esc(x.produtoNome)}</b><br>${"★".repeat(x.nota)}${"☆".repeat(5-x.nota)} — ${esc(x.nome)}, ${esc(x.cidade)} <small>${new Date(x.data).toLocaleDateString("pt-BR")}</small><br>${esc(x.texto)}<div class="r">${x.status!=="aprovada"?`<button data-t="avaliacao" data-i="${x.id}" data-a="aprovar">Aprovar</button>`:""}<button class="o" data-t="avaliacao" data-i="${x.id}" data-a="excluir">Excluir</button></div></div>`).join(""):"<p>Nenhuma avaliação ainda.</p>";
-  document.getElementById("pe").innerHTML=j.perguntas.length?j.perguntas.map(x=>`<div class="c"><span class="tg">${x.status==="respondida"?"Respondida":"Aguardando resposta"}</span><b>${esc(x.produtoNome)}</b><br>${esc(x.nome)} perguntou: ${esc(x.texto)}${x.resposta?`<br><b>Resposta:</b> ${esc(x.resposta)}`:""}<textarea rows="2" id="r${x.id}" placeholder="Sua resposta">${esc(x.resposta||"")}</textarea><div class="r"><button data-t="pergunta" data-i="${x.id}" data-a="responder">${x.resposta?"Atualizar resposta":"Responder e publicar"}</button><button class="o" data-t="pergunta" data-i="${x.id}" data-a="excluir">Excluir</button></div></div>`).join(""):"<p>Nenhuma pergunta ainda.</p>";
+const slug=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,50);
+const COR0={pink:"#FFBCCA",soft:"#FFE3EA",rose:"#E58FAA",deep:"#A93C60",ink:"#5E2E41",bg:"#FFF7F9"};
+const COR_NOMES=[["deep","Cor principal (faixa do topo, botões, rodapé)"],["pink","Rosa de destaque"],["soft","Rosa claro (fundos de botões)"],["rose","Rosa médio (detalhes)"],["ink","Cor dos textos"],["bg","Fundo do site"]];
+const BEN0=[{i:"🚚",t:"Frete na hora",d:"Digite o CEP e veja valor e prazo."},{i:"🛵",t:"Moto/Uber em Belém",d:"Valor combinado no WhatsApp."},{i:"🔒",t:"Pagamento seguro",d:"Pix ou cartão no Mercado Pago."},{i:"💬",t:"Tire dúvidas",d:"Tamanho e modelo no WhatsApp."}];
+const SLIDES0=[
+ {id:"conjunto-azul-fenda",a:"GLAMOUR",as:"SEU LOOK FAVORITO\nCHEGOU",b:"NEW IN",bs:"LANÇAMENTOS\nEXCLUSIVOS",c:"todos"},
+ {id:"pijama-panda",a:"FOFURA",as:"PIJAMAS E\nMACAQUINHOS",b:"CHARME",bs:"CONFORTO\nDE SOBRA",c:"pijamas"},
+ {id:"conjunto-vermelho-halter",a:"BRILHE",as:"CONJUNTOS PARA\nARRASAR",b:"SEMPRE",bs:"PEÇAS QUE FAZEM\nVOCÊ BRILHAR",c:"conjuntos"}];
+
+let senha="",cfg=null,aba="produtos",sujo=false,aberto=null,busca="",FBD=null,ocupado=false;
+
+/* ---------- utilidades ---------- */
+function aviso(t,ms=3500){const m=$("#msg");m.textContent=t;m.hidden=false;clearTimeout(aviso.t);aviso.t=setTimeout(()=>m.hidden=true,ms)}
+async function post(url,corpo){
+  const r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({senha,...corpo})});
+  const t=await r.text();let j;
+  try{j=JSON.parse(t)}catch(e){throw new Error("O servidor não respondeu corretamente (código "+r.status+"). Confira se as funções foram publicadas no Netlify.")}
+  if(!r.ok)throw new Error(j.erro||"Erro");return j;
 }
-document.getElementById("go").onclick=async()=>{senha=document.getElementById("s").value;try{pinta(await chama({a:"adm_lista"}));document.getElementById("lg").hidden=true;document.getElementById("pn").hidden=false}catch(e){document.getElementById("err").textContent=e.message}};
-document.addEventListener("click",async e=>{const b=e.target.closest("button[data-a]");if(!b)return;
-  if(b.dataset.a==="excluir"&&!confirm("Excluir este item?"))return;
-  try{pinta(await chama({a:"adm_acao",tipo:b.dataset.t,id:b.dataset.i,acao:b.dataset.a,resposta:(document.getElementById("r"+b.dataset.i)||{}).value}))}catch(err){alert(err.message)}});
+function marcar(v=true){sujo=v;const s=$("#st");s.textContent=v?"● alterações não publicadas":(cfg?"✓ tudo publicado":"");s.className=v?"d":"k"}
+addEventListener("beforeunload",e=>{if(sujo){e.preventDefault();e.returnValue=""}});
+const get=(o,p)=>p.split(".").reduce((a,k)=>a==null?a:a[k],o);
+function set(o,p,v){const ks=p.split(".");const u=ks.pop();const t=ks.reduce((a,k)=>a[k]==null?(a[k]={}):a[k],o);t[u]=v}
+
+/* imagens: reduz o tamanho antes de enviar */
+function lerArquivo(f){return new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(r.result);r.onerror=no;r.readAsDataURL(f)})}
+function carregarImg(src){return new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src=src})}
+async function reduzir(dataUrl,max,png){
+  const im=await carregarImg(dataUrl),k=Math.min(1,max/Math.max(im.width,im.height));
+  const c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);
+  const x=c.getContext("2d");if(!png){x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height)}x.drawImage(im,0,0,c.width,c.height);
+  return png?c.toDataURL("image/png"):c.toDataURL("image/jpeg",.84);
+}
+async function enviarFoto(arquivo,max=1100,png=false){
+  const d=await reduzir(await lerArquivo(arquivo),max,png);
+  return (await post(API,{a:"foto",dados:d})).url;
+}
+
+/* ---------- entrar ---------- */
+$("#go").onclick=entrar;$("#s").onkeydown=e=>{if(e.key==="Enter")entrar()};
+async function entrar(){
+  senha=$("#s").value;$("#err").textContent="";$("#go").disabled=true;
+  try{await post(API,{a:"ping"});try{sessionStorage.setItem("elg_s",senha)}catch(e){}await abrirPainel()}
+  catch(e){$("#err").textContent=e.message}
+  $("#go").disabled=false;
+}
+async function abrirPainel(){
+  await carregar();
+  $("#lg").hidden=true;$("#app").hidden=false;desenhar();
+}
+async function carregar(){
+  const r=await fetch(API+"?t="+Date.now(),{cache:"no-store"});const j=await r.json();
+  cfg=j.existe?j:null;
+  if(cfg){cfg.loja=cfg.loja||{};cfg.loja.beneficios=cfg.loja.beneficios&&cfg.loja.beneficios.length?cfg.loja.beneficios:BEN0.map(x=>({...x}));
+    cfg.cores=cfg.cores||{};cfg.categorias=cfg.categorias||[];cfg.produtos=cfg.produtos||[];cfg.slides=cfg.slides||[];}
+  marcar(false);
+}
+
+/* ---------- importar os dados atuais do site (primeira vez) ---------- */
+async function importar(){
+  const box=$("#prog");const p=t=>box.textContent=t;
+  try{
+    p("Lendo o site atual…");
+    const html=await (await fetch("/index.html",{cache:"no-store"})).text();
+    const m=/\(function \(\) \{\s*const C = \{[\s\S]*?window\.CATALOGO = C;\s*\}\)\(\);/.exec(html);
+    if(!m)throw new Error("Não consegui ler o catálogo do site.");
+    const w={};new Function("window",m[0])(w);const C=w.CATALOGO;
+    const cache={};let feitas=0;
+    const todas=[...new Set(C.produtos.flatMap(x=>x.fotos).filter(f=>f.startsWith("data:")))];
+    async function up(d){
+      if(cache[d])return cache[d];
+      let dados=d;if(!/^data:image\/(jpeg|png|webp|gif);/.test(d)||d.length>2400000)dados=await reduzir(d,1100,false);
+      const j=await post(API,{a:"foto",dados});cache[d]=j.url;p("Enviando fotos… "+(++feitas)+" de "+todas.length);return j.url;
+    }
+    const fila=[...todas];await Promise.all([0,1,2,3].map(async()=>{while(fila.length)await up(fila.shift())}));
+    const produtos=C.produtos.map(x=>({id:x.id,categoria:x.categoria,nome:x.nome,preco:x.preco,tamanhos:x.tamanhos,desc:x.desc,rotulo:x.rotulo,hero:x.hero,
+      fotos:x.fotos.map(f=>cache[f]||f),peso:x.peso,largura:x.largura,altura:x.altura,comprimento:x.comprimento}));
+    const L=C.loja;
+    const nova={loja:{nome:L.nome,nomeLogo:"EL GLAMOUR",sub1:"MODA FEMININA",sub2:"VARIEDADES",tituloSite:"El Glamour | Moda Feminina · Variedades — Loja online",
+      whats:L.whats,instagram:L.instagram,bio:L.bio,facebook:"",tiktok:"",youtube:"",cidadeLoja:L.cidadeLoja,cidadesMoto:L.cidadesMoto,avisos:L.avisos,logo:"",
+      rodape:"Belém/PA · Envio para todo o Brasil",copyright:"© El Glamour — Moda Feminina · Variedades. Todos os direitos reservados.",beneficios:BEN0},
+      cores:{...COR0},categorias:C.categorias,produtos,slides:SLIDES0};
+    p("Salvando…");await post(API,{a:"salvar",config:nova});
+    await carregar();aviso("Pronto! Seus produtos agora podem ser editados aqui.");desenhar();
+  }catch(e){box.textContent="Erro: "+e.message;$("#imp").disabled=false}
+}
+
+/* ---------- publicar ---------- */
+$("#pub").onclick=async()=>{
+  if(!cfg){aviso("Importe os dados do site primeiro.");return}
+  const sem=cfg.produtos.filter(p=>p.ativo!==false&&!(p.fotos||[]).length);
+  if(sem.length&&!confirm(sem.length+" produto(s) sem foto não vão aparecer no site ("+sem.map(p=>p.nome).slice(0,3).join(", ")+"…). Publicar mesmo assim?"))return;
+  const b=$("#pub");b.disabled=true;b.textContent="Publicando…";
+  try{const j=await post(API,{a:"salvar",config:cfg});cfg.v=j.v;marcar(false);aviso("Publicado! O site é atualizado em até 20 segundos ✓",5000)}
+  catch(e){aviso("Erro ao publicar: "+e.message,6000)}
+  b.disabled=false;b.textContent="Publicar alterações";
+};
+
+/* ---------- abas ---------- */
+const ABAS=[["produtos","Produtos"],["categorias","Categorias"],["loja","Loja e contato"],["visual","Cores e logo"],["textos","Textos e banners"],["fb","Avaliações e perguntas"]];
+function desenhar(){
+  $("#tabs").innerHTML=ABAS.map(([k,n])=>`<button class="${aba===k?"on":""}" data-aba="${k}">${n}</button>`).join("");
+  const v=$("#view");
+  if(aba==="fb"){v.innerHTML='<p>Carregando…</p>';carregarFb();return}
+  if(!cfg){v.innerHTML=`<div class="c"><h1>Primeiro acesso</h1><p>Vou copiar os produtos, fotos e textos que já estão no seu site para este painel. O site continua igual — depois disso você edita tudo por aqui.</p>
+    <button id="imp" data-imp="1">Importar dados do site</button> <p id="prog"></p></div>`;return}
+  v.innerHTML={produtos:telaProdutos,categorias:telaCategorias,loja:telaLoja,visual:telaVisual,textos:telaTextos}[aba]();
+}
+$("#tabs").onclick=e=>{const b=e.target.closest("[data-aba]");if(b){aba=b.dataset.aba;desenhar()}};
+
+/* ---------- produtos ---------- */
+function telaProdutos(){
+  const l=cfg.produtos.map((p,i)=>[p,i]).filter(([p])=>!busca||(p.nome||"").toLowerCase().includes(busca.toLowerCase()));
+  return `<h1>Produtos <small>(${cfg.produtos.length})</small></h1>
+  <div class="r"><button data-novo="1">+ Novo produto</button><input id="busca" placeholder="Buscar produto" value="${esc(busca)}" style="flex:1;min-width:160px"></div>
+  <div style="height:10px"></div>`+l.map(([p,i])=>cardProduto(p,i)).join("")||"<p>Nenhum produto.</p>";
+}
+function cardProduto(p,i){
+  const ab=aberto===p.id;
+  const cats=cfg.categorias.map(c=>`<option value="${esc(c.id)}" ${c.id===p.categoria?"selected":""}>${esc(c.nome)}</option>`).join("");
+  return `<div class="c" data-card="${i}"><div class="pr"><img src="${esc((p.fotos||[])[0]||"")}" alt=""><div class="i"><b>${esc(p.nome||"(sem nome)")}</b>
+   <small>R$ ${Number(p.preco||0).toFixed(2).replace(".",",")} · ${esc((cfg.categorias.find(c=>c.id===p.categoria)||{}).nome||"sem categoria")} ${p.ativo===false?'· <b style="color:#b3123f">OCULTO</b>':""} ${!(p.fotos||[]).length?'· <b style="color:#b3123f">SEM FOTO</b>':""}</small></div>
+   <button class="s o" data-up="${i}" title="Subir">↑</button><button class="s o" data-down="${i}" title="Descer">↓</button><button class="s" data-edit="${p.id}">${ab?"Fechar":"Editar"}</button></div>
+  ${ab?`<div style="margin-top:10px">
+   <label>Nome</label><input data-pi="${i}" data-f="nome" value="${esc(p.nome)}">
+   <div class="g2"><div><label>Preço (R$)</label><input data-pi="${i}" data-f="preco" data-t="num" inputmode="decimal" value="${esc(String(p.preco??"").replace(".",","))}"></div>
+   <div><label>Categoria</label><select data-pi="${i}" data-f="categoria"><option value="">— escolha —</option>${cats}</select></div></div>
+   <label>Tamanhos / opções <small>(separe por vírgula. Ex.: P, M, G)</small></label><input data-pi="${i}" data-f="tamanhos" data-t="lista" value="${esc((p.tamanhos||[]).join(", "))}">
+   <label>Nome da escolha <small>(Tamanho, Modelo, Cor… deixe vazio para "Tamanho")</small></label><input data-pi="${i}" data-f="rotulo" value="${esc(p.rotulo||"")}">
+   <label>Descrição</label><textarea data-pi="${i}" data-f="desc" rows="5">${esc(p.desc)}</textarea>
+   <label>Fotos <small>(a primeira é a principal)</small></label>
+   <div class="fotos">${(p.fotos||[]).map((f,k)=>`<div class="ft"><img src="${esc(f)}" alt=""><div><button class="s o" data-fm="${i}:${k}:-1">◀</button><button class="s o" data-fm="${i}:${k}:1">▶</button><button class="s r" data-fx="${i}:${k}">✕</button></div></div>`).join("")}
+    <label class="ft" style="cursor:pointer;display:grid;place-items:center;min-height:110px;margin:0;font-size:13px">+ Adicionar foto<input type="file" accept="image/*" multiple hidden data-fadd="${i}"></label></div>
+   <p class="chk"><label class="chk" style="margin:0"><input type="checkbox" data-pi="${i}" data-f="ativo" ${p.ativo===false?"":"checked"}> Mostrar no site</label></p>
+   <h3>Medidas para o frete</h3>
+   <div class="g4"><div><label>Peso (kg)</label><input data-pi="${i}" data-f="peso" data-t="num" value="${esc(String(p.peso??0.3).replace(".",","))}"></div>
+   <div><label>Largura (cm)</label><input data-pi="${i}" data-f="largura" data-t="num" value="${esc(String(p.largura??20).replace(".",","))}"></div>
+   <div><label>Altura (cm)</label><input data-pi="${i}" data-f="altura" data-t="num" value="${esc(String(p.altura??5).replace(".",","))}"></div>
+   <div><label>Comprim. (cm)</label><input data-pi="${i}" data-f="comprimento" data-t="num" value="${esc(String(p.comprimento??25).replace(".",","))}"></div></div>
+   <div class="r"><button class="o s" data-dup="${i}">Duplicar</button><button class="r s" data-del="${i}">Excluir produto</button></div></div>`:""}</div>`;
+}
+function novoProduto(){
+  const id="peca-"+Date.now().toString(36);
+  cfg.produtos.unshift({id,categoria:(cfg.categorias[0]||{}).id||"",nome:"Novo produto",preco:0,tamanhos:["P","M","G"],desc:"",fotos:[],peso:0.3,largura:20,altura:5,comprimento:25});
+  aberto=id;marcar();desenhar();
+}
+
+/* ---------- categorias ---------- */
+function telaCategorias(){
+  return `<h1>Categorias</h1><p>Aparecem no menu e nos círculos do site (só as que têm produtos).</p>`+
+  cfg.categorias.map((c,i)=>{const n=cfg.produtos.filter(p=>p.categoria===c.id).length;
+   return `<div class="c"><div class="pr"><input data-ci="${i}" value="${esc(c.nome)}"><small>${n} peça(s)</small><button class="s o" data-cup="${i}">↑</button><button class="s o" data-cdown="${i}">↓</button><button class="s r" data-cdel="${i}">✕</button></div></div>`}).join("")+
+  `<div class="r"><input id="ncat" placeholder="Nome da nova categoria" style="flex:1"><button data-cadd="1">+ Adicionar</button></div>`;
+}
+
+/* ---------- loja e contato ---------- */
+const campo=(rot,path,dica,tipo)=>`<label>${rot}${dica?` <small>${dica}</small>`:""}</label><input data-b="${path}" ${tipo?`data-t="${tipo}"`:""} value="${esc(tipo==="lista"?(get(cfg,path)||[]).join(", "):get(cfg,path))}">`;
+function telaLoja(){
+  return `<h1>Loja e contato</h1><div class="c">
+  ${campo("Nome da loja","loja.nome")}
+  ${campo("WhatsApp","loja.whats","só números, com 55 + DDD. Ex.: 5591999999999","num0")}
+  ${campo("Instagram (link)","loja.instagram","https://www.instagram.com/sua_loja/")}
+  ${campo("Link da bio / catálogo","loja.bio","https://…")}
+  ${campo("Facebook (link)","loja.facebook","deixe vazio para não mostrar")}
+  ${campo("TikTok (link)","loja.tiktok","deixe vazio para não mostrar")}
+  ${campo("YouTube (link)","loja.youtube","deixe vazio para não mostrar")}
+  ${campo("Cidade da loja","loja.cidadeLoja")}
+  ${campo("Cidades com entrega por moto/Uber","loja.cidadesMoto","separe por vírgula. Ex.: Belém, Ananindeua","lista")}
+  </div><h2>Zona de risco</h2><div class="c"><p>Volta o site para os produtos e textos originais (as alterações do painel são apagadas).</p><button class="r s" data-restaurar="1">Restaurar site original</button></div>`;
+}
+
+/* ---------- cores e logo ---------- */
+function telaVisual(){
+  const c=k=>cfg.cores[k]||COR0[k];
+  return `<h1>Cores e logo</h1><div class="c"><h3>Logo da loja</h3>
+   ${cfg.loja.logo?`<img class="logo" src="${esc(cfg.loja.logo)}" alt="Logo">`:"<p>Usando a borboleta original do site.</p>"}
+   <div class="r"><label class="s" style="background:var(--deep);color:#fff;padding:6px 12px;border-radius:10px;cursor:pointer;margin:0">Enviar logo<input type="file" accept="image/*" hidden id="logoUp"></label>
+   ${cfg.loja.logo?'<button class="o s" data-logo-x="1">Voltar à borboleta</button>':""}</div>
+   <small>Dica: PNG com fundo transparente. Ela aparece acima do nome da loja no topo e no rodapé.</small></div>
+  <div class="c"><h3>Cores do site</h3>
+   <div class="prev">${["deep","pink","soft","rose","ink","bg"].map(k=>`<i style="background:${c(k)}"></i>`).join("")}</div>
+   ${COR_NOMES.map(([k,n])=>`<div class="cor"><input type="color" data-cor="${k}" value="${c(k)}"><span>${n}</span></div>`).join("")}
+   <button class="o s" data-cor-reset="1">Voltar às cores originais</button></div>`;
+}
+
+/* ---------- textos e banners ---------- */
+function telaTextos(){
+  const L=cfg.loja,b=L.beneficios;
+  const prods=cfg.produtos.map(p=>`<option value="${esc(p.id)}">${esc(p.nome)}</option>`).join("");
+  const cats=`<option value="todos">Todas as peças</option>`+cfg.categorias.map(c=>`<option value="${esc(c.id)}">${esc(c.nome)}</option>`).join("");
+  return `<h1>Textos e banners</h1>
+  <div class="c"><h3>Nome no topo do site</h3><div class="g3">
+   <div>${campo("Nome","loja.nomeLogo")}</div><div>${campo("Linha 1","loja.sub1")}</div><div>${campo("Linha 2","loja.sub2")}</div></div>
+   ${campo("Título da aba do navegador","loja.tituloSite")}</div>
+  <div class="c"><h3>Letreiro do topo</h3><label>Uma frase por linha <small>(frases com "WhatsApp" viram link)</small></label>
+   <textarea data-b="loja.avisos" data-t="linhas" rows="5">${esc((L.avisos||[]).join("\n"))}</textarea></div>
+  <div class="c"><h3>Os 4 quadros abaixo do banner</h3>${b.map((x,i)=>`<div class="g3" style="grid-template-columns:70px 1fr 2fr"><div><label>Ícone</label><input data-b="loja.beneficios.${i}.i" value="${esc(x.i)}"></div><div><label>Título</label><input data-b="loja.beneficios.${i}.t" value="${esc(x.t)}"></div><div><label>Texto</label><input data-b="loja.beneficios.${i}.d" value="${esc(x.d)}"></div></div>`).join("")}</div>
+  <div class="c"><h3>Rodapé</h3>${campo("Linha de endereço/envio","loja.rodape")}${campo("Direitos reservados","loja.copyright")}</div>
+  <div class="c"><h3>Banners grandes (carrossel)</h3>
+   ${(cfg.slides||[]).map((s,i)=>`<div class="c" style="background:#fff8fa"><div class="g2">
+     <div><label>Peça da foto</label><select data-si="${i}" data-f="id"><option value="">— usar foto própria —</option>${prods.replace(`value="${esc(s.id)}"`,`value="${esc(s.id)}" selected`)}</select></div>
+     <div><label>Ao clicar, abrir</label><select data-si="${i}" data-f="c">${cats.replace(`value="${esc(s.c||"todos")}"`,`value="${esc(s.c||"todos")}" selected`)}</select></div></div>
+     ${s.img?`<img class="logo" src="${esc(s.img)}" alt="" style="max-height:80px">`:""}
+     <div class="r"><label class="s" style="background:var(--soft);color:var(--deep);padding:5px 10px;border-radius:10px;cursor:pointer;margin:0">Enviar foto própria<input type="file" accept="image/*" hidden data-simg="${i}"></label>${s.img?`<button class="o s" data-simg-x="${i}">Remover foto própria</button>`:""}</div>
+     <div class="g2"><div><label>Texto grande (esquerda)</label><input data-si="${i}" data-f="a" value="${esc(s.a)}"></div><div><label>Texto grande (direita)</label><input data-si="${i}" data-f="b" value="${esc(s.b)}"></div>
+     <div><label>Subtexto esquerda</label><textarea data-si="${i}" data-f="as" rows="2">${esc(s.as)}</textarea></div><div><label>Subtexto direita</label><textarea data-si="${i}" data-f="bs" rows="2">${esc(s.bs)}</textarea></div></div>
+     <div class="r"><button class="s o" data-sup="${i}">↑</button><button class="s o" data-sdown="${i}">↓</button><button class="s r" data-sdel="${i}">Remover banner</button></div></div>`).join("")}
+   <button class="s" data-sadd="1" ${(cfg.slides||[]).length>=6?"disabled":""}>+ Novo banner</button></div>`;
+}
+
+/* ---------- avaliações e perguntas ---------- */
+async function carregarFb(corpo){
+  try{FBD=await post(FB,corpo||{a:"adm_lista"});pintaFb()}catch(e){$("#view").innerHTML=`<p class="warn">${esc(e.message)}</p>`}
+}
+function pintaFb(){
+  const j=FBD;
+  $("#view").innerHTML=`<h1>Avaliações</h1>`+(j.avaliacoes.length?j.avaliacoes.map(x=>`<div class="c"><span class="tg">${x.status==="aprovada"?"Publicada":"Aguardando"}</span>${x.verificado?'<span class="tg">Compra verificada</span>':""}<b>${esc(x.produtoNome)}</b><br>${"★".repeat(x.nota)}${"☆".repeat(5-x.nota)} — ${esc(x.nome)}, ${esc(x.cidade)} <small>${new Date(x.data).toLocaleDateString("pt-BR")}</small><br>${esc(x.texto)}<div class="r">${x.status!=="aprovada"?`<button class="s" data-t="avaliacao" data-i="${x.id}" data-a="aprovar">Aprovar</button>`:""}<button class="o s" data-t="avaliacao" data-i="${x.id}" data-a="excluir">Excluir</button></div></div>`).join(""):"<p>Nenhuma avaliação ainda.</p>")+
+  `<h1 style="margin-top:22px">Perguntas</h1>`+(j.perguntas.length?j.perguntas.map(x=>`<div class="c"><span class="tg">${x.status==="respondida"?"Respondida":"Aguardando resposta"}</span><b>${esc(x.produtoNome)}</b><br>${esc(x.nome)} perguntou: ${esc(x.texto)}<textarea rows="2" id="r${x.id}" placeholder="Sua resposta" style="margin-top:6px">${esc(x.resposta||"")}</textarea><div class="r"><button class="s" data-t="pergunta" data-i="${x.id}" data-a="responder">${x.resposta?"Atualizar resposta":"Responder e publicar"}</button><button class="o s" data-t="pergunta" data-i="${x.id}" data-a="excluir">Excluir</button></div></div>`).join(""):"<p>Nenhuma pergunta ainda.</p>");
+}
+
+/* ---------- eventos (um único ouvinte para tudo) ---------- */
+const V=$("#view");
+V.addEventListener("input",e=>{
+  const t=e.target;if(t.id==="busca"){busca=t.value;const pos=t.selectionStart;desenhar();const n=$("#busca");n.focus();n.setSelectionRange(pos,pos);return}
+  if(t.dataset.b){
+    let v=t.value;if(t.dataset.t==="lista")v=v.split(",").map(x=>x.trim()).filter(Boolean);
+    else if(t.dataset.t==="linhas")v=v.split("\n").map(x=>x.trim()).filter(Boolean);
+    else if(t.dataset.t==="num0")v=v.replace(/\D/g,"");
+    set(cfg,t.dataset.b,v);marcar();return}
+  if(t.dataset.pi!=null&&t.type!=="checkbox"){
+    const p=cfg.produtos[+t.dataset.pi],f=t.dataset.f;let v=t.value;
+    if(t.dataset.t==="num")v=parseFloat(v.replace(",","."))||0;else if(t.dataset.t==="lista")v=v.split(",").map(x=>x.trim()).filter(Boolean);
+    p[f]=v;marcar();return}
+  if(t.dataset.si!=null){cfg.slides[+t.dataset.si][t.dataset.f]=t.value;marcar();return}
+  if(t.dataset.ci!=null){cfg.categorias[+t.dataset.ci].nome=t.value;marcar();return}
+});
+V.addEventListener("change",async e=>{
+  const t=e.target;
+  if(t.dataset.pi!=null&&t.type==="checkbox"){const p=cfg.produtos[+t.dataset.pi];if(t.checked)delete p.ativo;else p.ativo=false;marcar();return}
+  if(t.dataset.pi!=null&&t.tagName==="SELECT"){cfg.produtos[+t.dataset.pi][t.dataset.f]=t.value;marcar();return}
+  if(t.dataset.si!=null&&t.tagName==="SELECT"){cfg.slides[+t.dataset.si][t.dataset.f]=t.value;marcar();return}
+  if(t.dataset.cor){cfg.cores[t.dataset.cor]=t.value;marcar();t.closest(".c").querySelector(".prev").innerHTML=["deep","pink","soft","rose","ink","bg"].map(k=>`<i style="background:${cfg.cores[k]||COR0[k]}"></i>`).join("");return}
+  if(t.dataset.fadd!=null||t.dataset.simg!=null||t.id==="logoUp"){
+    const arqs=[...t.files];if(!arqs.length)return;aviso("Enviando imagem…",60000);
+    try{
+      if(t.id==="logoUp"){cfg.loja.logo=await enviarFoto(arqs[0],500,true)}
+      else if(t.dataset.simg!=null){cfg.slides[+t.dataset.simg].img=await enviarFoto(arqs[0],1400)}
+      else{const p=cfg.produtos[+t.dataset.fadd];p.fotos=p.fotos||[];for(const f of arqs){if(p.fotos.length>=10)break;p.fotos.push(await enviarFoto(f))}}
+      marcar();aviso("Imagem enviada ✓ Clique em \"Publicar alterações\" quando terminar.");desenhar();
+    }catch(err){aviso("Erro ao enviar: "+err.message,6000)}
+  }
+});
+V.addEventListener("click",async e=>{
+  const b=e.target.closest("button,[data-imp]");if(!b)return;const d=b.dataset;
+  const mover=(arr,i,k)=>{const j=i+k;if(j<0||j>=arr.length)return false;[arr[i],arr[j]]=[arr[j],arr[i]];return true};
+  if(d.imp){b.disabled=true;importar();return}
+  if(d.novo)return novoProduto();
+  if(d.edit){aberto=aberto===d.edit?null:d.edit;desenhar();return}
+  if(d.up!=null){if(mover(cfg.produtos,+d.up,-1)){marcar();desenhar()}return}
+  if(d.down!=null){if(mover(cfg.produtos,+d.down,1)){marcar();desenhar()}return}
+  if(d.del!=null){if(confirm("Excluir este produto?")){cfg.produtos.splice(+d.del,1);aberto=null;marcar();desenhar()}return}
+  if(d.dup!=null){const p=JSON.parse(JSON.stringify(cfg.produtos[+d.dup]));p.id="peca-"+Date.now().toString(36);p.nome+=" (cópia)";cfg.produtos.splice(+d.dup+1,0,p);aberto=p.id;marcar();desenhar();return}
+  if(d.fx){const[i,k]=d.fx.split(":").map(Number);cfg.produtos[i].fotos.splice(k,1);marcar();desenhar();return}
+  if(d.fm){const[i,k,s]=d.fm.split(":").map(Number);if(mover(cfg.produtos[i].fotos,k,s)){marcar();desenhar()}return}
+  if(d.cup!=null){if(mover(cfg.categorias,+d.cup,-1)){marcar();desenhar()}return}
+  if(d.cdown!=null){if(mover(cfg.categorias,+d.cdown,1)){marcar();desenhar()}return}
+  if(d.cdel!=null){const c=cfg.categorias[+d.cdel],n=cfg.produtos.filter(p=>p.categoria===c.id).length;
+    if(confirm(n?`Há ${n} peça(s) nesta categoria; elas ficarão sem categoria. Excluir mesmo assim?`:"Excluir esta categoria?")){cfg.categorias.splice(+d.cdel,1);marcar();desenhar()}return}
+  if(d.cadd){const nome=$("#ncat").value.trim();if(!nome)return;let id=slug(nome),n=1;while(cfg.categorias.some(c=>c.id===id))id=slug(nome)+"-"+(++n);cfg.categorias.push({id,nome});marcar();desenhar();return}
+  if(d.logoX){cfg.loja.logo="";marcar();desenhar();return}
+  if(d.corReset){cfg.cores={};marcar();desenhar();return}
+  if(d.sadd){cfg.slides.push({id:(cfg.produtos[0]||{}).id||"",a:"NOVIDADE",as:"CONFIRA NOSSAS\nPEÇAS",b:"EL GLAMOUR",bs:"MODA FEMININA",c:"todos"});marcar();desenhar();return}
+  if(d.sdel!=null){cfg.slides.splice(+d.sdel,1);marcar();desenhar();return}
+  if(d.sup!=null){if(mover(cfg.slides,+d.sup,-1)){marcar();desenhar()}return}
+  if(d.sdown!=null){if(mover(cfg.slides,+d.sdown,1)){marcar();desenhar()}return}
+  if(d.simgX!=null){delete cfg.slides[+d.simgX].img;marcar();desenhar();return}
+  if(d.restaurar){if(!confirm("Isso apaga TODAS as alterações feitas no painel e volta o site ao original. Continuar?"))return;
+    try{await post(API,{a:"restaurar"});cfg=null;marcar(false);aviso("Site restaurado ao original.");desenhar()}catch(err){aviso(err.message)}return}
+  if(d.a&&d.t){ // avaliações e perguntas
+    if(d.a==="excluir"&&!confirm("Excluir este item?"))return;
+    try{await carregarFb({a:"adm_acao",tipo:d.t,id:d.i,acao:d.a,resposta:(document.getElementById("r"+d.i)||{}).value})}catch(err){aviso(err.message)}
+  }
+});
+
+/* já logado nesta aba? */
+(async()=>{try{const s=sessionStorage.getItem("elg_s");if(s){senha=s;await post(API,{a:"ping"});await abrirPainel()}}catch(e){senha=""}})();
 </script></body></html>
