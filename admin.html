@@ -47,7 +47,7 @@ main{max-width:860px;margin:0 auto;padding:14px}
 </div>
 
 <div id="app" hidden>
-  <div class="top"><b>Painel El Glamour <small style="font-weight:400;opacity:.7">v2 · etiquetas e banners</small></b><span id="st"></span><a href="/" target="_blank" rel="noopener">Ver loja ↗</a><button id="pub">Publicar alterações</button></div>
+  <div class="top"><b>Painel El Glamour <small style="font-weight:400;opacity:.7">v3 · estilos de texto</small></b><span id="st"></span><a href="/" target="_blank" rel="noopener">Ver loja ↗</a><button id="pub">Publicar alterações</button></div>
   <div id="tabs"></div>
   <main id="view"></main>
 </div>
@@ -158,14 +158,14 @@ $("#pub").onclick=async()=>{
 };
 
 /* ---------- abas ---------- */
-const ABAS=[["produtos","Produtos"],["categorias","Categorias"],["loja","Loja e contato"],["visual","Cores e logo"],["banners","Banners"],["textos","Textos"],["fb","Avaliações e perguntas"]];
+const ABAS=[["produtos","Produtos"],["categorias","Categorias"],["loja","Loja e contato"],["visual","Cores e logo"],["banners","Banners"],["textos","Textos"],["estilos","Estilo de texto"],["fb","Avaliações e perguntas"]];
 function desenhar(){
   $("#tabs").innerHTML=ABAS.map(([k,n])=>`<button class="${aba===k?"on":""}" data-aba="${k}">${n}</button>`).join("");
   const v=$("#view");
   if(aba==="fb"){v.innerHTML='<p>Carregando…</p>';carregarFb();return}
   if(!cfg){v.innerHTML=`<div class="c"><h1>Primeiro acesso</h1><p>Vou copiar os produtos, fotos e textos que já estão no seu site para este painel. O site continua igual — depois disso você edita tudo por aqui.</p>
     <button id="imp" data-imp="1">Importar dados do site</button> <p id="prog"></p></div>`;return}
-  v.innerHTML={produtos:telaProdutos,categorias:telaCategorias,loja:telaLoja,visual:telaVisual,banners:telaBanners,textos:telaTextos}[aba]();
+  v.innerHTML={produtos:telaProdutos,categorias:telaCategorias,loja:telaLoja,visual:telaVisual,banners:telaBanners,textos:telaTextos,estilos:telaEstilos}[aba]();
 }
 $("#tabs").onclick=e=>{const b=e.target.closest("[data-aba]");if(b){aba=b.dataset.aba;desenhar()}};
 
@@ -265,6 +265,38 @@ function telaTextos(){
   <div class="c"><h3>Rodapé</h3>${campo("Linha de endereço/envio","loja.rodape")}${campo("Direitos reservados","loja.copyright")}</div>`;
 }
 
+/* ---------- estilo de texto ---------- */
+const FONTES=[["montserrat","Montserrat (padrão do site)","'Montserrat',sans-serif",""],["cormorant","Cormorant Garamond (elegante)","'Cormorant Garamond',serif",""],["playfair","Playfair Display (clássica)","'Playfair Display',serif","Playfair+Display:wght@400;700;800;900"],
+ ["alfa","Alfa Slab One (forte)","'Alfa Slab One',serif",""],["poppins","Poppins (moderna)","'Poppins',sans-serif","Poppins:wght@400;600;700;800"],["lobster","Lobster (cursiva)","'Lobster',cursive","Lobster"],
+ ["pacifico","Pacifico (cursiva)","'Pacifico',cursive","Pacifico"],["dancing","Dancing Script (manuscrita)","'Dancing Script',cursive","Dancing+Script:wght@400;700"],["greatvibes","Great Vibes (convite)","'Great Vibes',cursive","Great+Vibes"],
+ ["satisfy","Satisfy (assinatura)","'Satisfy',cursive","Satisfy"],["caveat","Caveat (à mão)","'Caveat',cursive","Caveat:wght@400;700"],["oswald","Oswald (alta e estreita)","'Oswald',sans-serif","Oswald:wght@400;600;700"],
+ ["bebas","Bebas Neue (impacto)","'Bebas Neue',sans-serif","Bebas+Neue"],["abril","Abril Fatface (destaque)","'Abril Fatface',serif","Abril+Fatface"],["raleway","Raleway","'Raleway',sans-serif","Raleway:wght@400;600;800"],
+ ["quicksand","Quicksand (arredondada)","'Quicksand',sans-serif","Quicksand:wght@400;600;700"],["lato","Lato","'Lato',sans-serif","Lato:wght@400;700;900"],["roboto","Roboto","'Roboto',sans-serif","Roboto:wght@400;500;700"]];
+const AREAS_E=[["banner1","⭐ Banner — texto grande (destaque)","GLAMOUR",true],["banner2","Banner — subtexto","SEU LOOK FAVORITO CHEGOU",true],["titulos","Títulos das seções","Todas as peças",true],["marca","Nome da loja (logo)","EL GLAMOUR",true],
+ ["topo","Letreiro do topo","🚚 Frete calculado na hora para todo o Brasil",true],["menu","Menu de categorias","CONJUNTOS",true],["quadros","Quadros de benefícios","Frete na hora",true],["produto","Nome do produto (cards)","Conjunto Azul com Fenda",true],
+ ["preco","Preço dos produtos","R$ 119,90",true],["rodape","Rodapé","Belém/PA · Envio para todo o Brasil",true],["geral","Texto geral do site (fonte padrão)","Texto do site",false]];
+const PADRAO_E={banner1:["800","#ffffff"],banner2:["600","#ffffff"],titulos:["700","#A93C60"],marca:["600","#5E2E41"],topo:["600","#ffffff"],menu:["700","#ffffff"],quadros:["600","#5E2E41"],produto:["600","#5E2E41"],preco:["800","#5E2E41"],rodape:["400","#ffffff"],geral:["400","#5E2E41"]};
+function carregarFontesAdmin(){if(document.getElementById("fnt"))return;const l=document.createElement("link");l.id="fnt";l.rel="stylesheet";
+  l.href="https://fonts.googleapis.com/css2?family="+FONTES.map(f=>f[3]||f[0]==="montserrat"&&"Montserrat:wght@400;600;700;800"||f[0]==="cormorant"&&"Cormorant+Garamond:wght@500;700"||f[0]==="alfa"&&"Alfa+Slab+One").filter(Boolean).join("&family=")+"&display=swap";document.head.appendChild(l)}
+function estiloCss(e,sem){e=e||{};const f=FONTES.find(x=>x[0]===e.fonte);const CX={maiuscula:"uppercase",minuscula:"lowercase",capitalizar:"capitalize",normal:"none"};
+  return `${f?`font-family:${f[2]};`:""}${e.peso?`font-weight:${e.peso};`:""}${e.italico?"font-style:italic;":""}${e.caixa?`text-transform:${CX[e.caixa]};`:""}${e.cor?`color:${e.cor};`:""}font-size:${Math.round(22*(e.tam||100)/100)}px;`}
+function telaEstilos(){
+  carregarFontesAdmin();cfg.estilos=cfg.estilos||{};
+  return `<h1>Estilo de texto</h1><p>Escolha a fonte, o tamanho, o negrito, o itálico e a cor de cada parte do site. A prévia mostra como fica. Deixe "Padrão" para manter o estilo original.</p>`+
+  AREAS_E.map(([k,nome,ex,tam])=>{const e=cfg.estilos[k]||{};
+   return `<div class="c"><h3>${nome}</h3>
+   <div style="background:${k==="banner1"||k==="banner2"||k==="topo"||k==="menu"||k==="rodape"?"#A93C60":"#fff"};border:1px dashed var(--line);border-radius:10px;padding:12px;margin:6px 0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;${["banner1","banner2","topo","menu","rodape"].includes(k)?"color:#fff;":"color:#5E2E41;"}" data-prev="${k}"><span style="${estiloCss(e)}">${esc(ex)}</span></div>
+   <div class="g2"><div><label>Fonte</label><select data-ek="${k}" data-ef="fonte"><option value="">Padrão do site</option>${FONTES.map(f=>`<option value="${f[0]}" ${e.fonte===f[0]?"selected":""}>${f[1]}</option>`).join("")}</select></div>
+   <div><label>Espessura</label><select data-ek="${k}" data-ef="peso"><option value="">Padrão</option>${[[400,"Normal"],[500,"Média"],[600,"Semi-negrito"],[700,"Negrito"],[800,"Extra negrito"],[900,"Super negrito"]].map(([v,n])=>`<option value="${v}" ${+e.peso===v?"selected":""}>${n}</option>`).join("")}</select></div></div>
+   <div class="g2">${tam?`<div><label>Tamanho: <b>${e.tam||100}%</b></label><input type="range" min="60" max="220" step="5" value="${e.tam||100}" data-ek="${k}" data-ef="tam"></div>`:"<div></div>"}
+   <div><label>Letras</label><select data-ek="${k}" data-ef="caixa"><option value="">Padrão</option><option value="maiuscula" ${e.caixa==="maiuscula"?"selected":""}>MAIÚSCULAS</option><option value="minuscula" ${e.caixa==="minuscula"?"selected":""}>minúsculas</option><option value="capitalizar" ${e.caixa==="capitalizar"?"selected":""}>Primeira Maiúscula</option><option value="normal" ${e.caixa==="normal"?"selected":""}>Como digitado</option></select></div></div>
+   <div class="r" style="margin-top:10px"><label class="chk" style="margin:0"><input type="checkbox" data-ek="${k}" data-ef="italico" ${e.italico?"checked":""}> <i>Itálico</i></label>
+    <label class="chk" style="margin:0 0 0 10px"><input type="checkbox" data-ek="${k}" data-ef="usacor" ${e.cor?"checked":""}> Cor própria</label>
+    <input type="color" data-ek="${k}" data-ef="cor" value="${e.cor||PADRAO_E[k][1]}" style="width:46px;height:36px;padding:0;border:1.5px solid var(--line);border-radius:8px;${e.cor?"":"opacity:.35"}">
+    <button class="o s" data-ereset="${k}" style="margin-left:auto">Voltar ao padrão</button></div></div>`}).join("");
+}
+function atualizaPrevia(k){const e=cfg.estilos[k]||{};const d=document.querySelector(`[data-prev="${k}"] span`);if(d)d.style.cssText=estiloCss(e)}
+
 /* ---------- banners ---------- */
 function telaBanners(){
   const prods=cfg.produtos.map(p=>`<option value="${esc(p.id)}">${esc(p.nome)}</option>`).join("");
@@ -295,8 +327,18 @@ function pintaFb(){
 
 /* ---------- eventos (um único ouvinte para tudo) ---------- */
 const V=$("#view");
+function mudaEstilo(t){
+  const k=t.dataset.ek,f=t.dataset.ef;cfg.estilos=cfg.estilos||{};const e=cfg.estilos[k]=cfg.estilos[k]||{};
+  if(f==="italico"){if(t.checked)e.italico=true;else delete e.italico}
+  else if(f==="usacor"){if(t.checked)e.cor=t.closest(".r").querySelector('[data-ef="cor"]').value;else delete e.cor;t.closest(".r").querySelector('[data-ef="cor"]').style.opacity=t.checked?1:.35}
+  else if(f==="cor"){e.cor=t.value;t.closest(".r").querySelector('[data-ef="usacor"]').checked=true;t.style.opacity=1}
+  else if(f==="tam"){if(+t.value===100)delete e.tam;else e.tam=+t.value;const b=t.closest("div").querySelector("label b");if(b)b.textContent=t.value+"%"}
+  else{if(t.value)e[f]=t.value;else delete e[f]}
+  if(!Object.keys(e).length)delete cfg.estilos[k];
+  marcar();atualizaPrevia(k);
+}
 V.addEventListener("input",e=>{
-  const t=e.target;if(t.id==="busca"){busca=t.value;const pos=t.selectionStart;desenhar();const n=$("#busca");n.focus();n.setSelectionRange(pos,pos);return}
+  const t=e.target;if(t.dataset.ek&&["tam","cor"].includes(t.dataset.ef)){mudaEstilo(t);return}if(t.id==="busca"){busca=t.value;const pos=t.selectionStart;desenhar();const n=$("#busca");n.focus();n.setSelectionRange(pos,pos);return}
   if(t.dataset.b){
     let v=t.value;if(t.dataset.t==="lista")v=v.split(",").map(x=>x.trim()).filter(Boolean);
     else if(t.dataset.t==="linhas")v=v.split("\n").map(x=>x.trim()).filter(Boolean);
@@ -311,6 +353,7 @@ V.addEventListener("input",e=>{
 });
 V.addEventListener("change",async e=>{
   const t=e.target;
+  if(t.dataset.ek&&!["tam","cor"].includes(t.dataset.ef)){mudaEstilo(t);return}
   if(t.dataset.pi!=null&&t.type==="checkbox"){const p=cfg.produtos[+t.dataset.pi];if(t.checked)delete p.ativo;else p.ativo=false;marcar();return}
   if(t.dataset.pi!=null&&t.tagName==="SELECT"){cfg.produtos[+t.dataset.pi][t.dataset.f]=t.value;marcar();return}
   if(t.dataset.si!=null&&t.tagName==="SELECT"){cfg.slides[+t.dataset.si][t.dataset.f]=t.value;marcar();return}
@@ -345,6 +388,7 @@ V.addEventListener("click",async e=>{
   if(d.cdown!=null){if(mover(cfg.categorias,+d.cdown,1)){marcar();desenhar()}return}
   if(d.cdel!=null){const c=cfg.categorias[+d.cdel],n=cfg.produtos.filter(p=>p.categoria===c.id).length;
     if(confirm(n?`Há ${n} peça(s) nesta categoria; elas ficarão sem categoria. Excluir mesmo assim?`:"Excluir esta categoria?")){cfg.categorias.splice(+d.cdel,1);marcar();desenhar()}return}
+  if(d.ereset){delete (cfg.estilos||{})[d.ereset];marcar();desenhar();return}
   if(d.pstar!=null){const p=cfg.produtos[+d.pstar];p.tags=p.tags||[];p.tags=p.tags.includes("destaque")?p.tags.filter(x=>x!=="destaque"):[...p.tags,"destaque"];marcar();desenhar();return}
   if(d.pvis!=null){const p=cfg.produtos[+d.pvis];if(p.ativo===false)delete p.ativo;else p.ativo=false;marcar();desenhar();return}
   if(d.cvis!=null){const c=cfg.categorias[+d.cvis];if(c.ativo===false)delete c.ativo;else c.ativo=false;marcar();desenhar();return}

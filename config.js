@@ -24,6 +24,8 @@ const HTTPS = v => { v = String(v || "").trim(); return /^https:\/\/[^\s"'<>]{4,
 const COR = v => /^#[0-9a-f]{6}$/i.test(String(v || "")) ? String(v).toLowerCase() : "";
 const slug = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
 const TAGS = ["destaque", "oferta", "vendido", "lancamento", "ultimas", "exclusivo"];
+const FONTES = ["montserrat", "cormorant", "playfair", "alfa", "poppins", "lobster", "pacifico", "dancing", "greatvibes", "oswald", "bebas", "raleway", "quicksand", "abril", "caveat", "satisfy", "lato", "roboto"];
+const AREAS = ["geral", "topo", "marca", "menu", "banner1", "banner2", "quadros", "titulos", "produto", "preco", "rodape"];
 const lista = (v, max, n) => (Array.isArray(v) ? v : []).map(x => S(x, n)).filter(Boolean).slice(0, max);
 
 function limparConfig(c) {
@@ -49,6 +51,20 @@ function limparConfig(c) {
   const cores = {};
   ["pink", "soft", "rose", "deep", "ink", "bg"].forEach(k => { const v = COR((c.cores || {})[k]); if (v) cores[k] = v; });
   out.cores = cores;
+
+  const est = {};
+  AREAS.forEach(a => {
+    const e = (c.estilos || {})[a]; if (!e || typeof e !== "object") return;
+    const o = {};
+    if (FONTES.includes(e.fonte)) o.fonte = e.fonte;
+    const t = Math.round(N(e.tam, 100, 60, 220)); if (t !== 100) o.tam = t;
+    if ([400, 500, 600, 700, 800, 900].includes(+e.peso)) o.peso = +e.peso;
+    if (e.italico) o.italico = true;
+    if (["maiuscula", "minuscula", "capitalizar", "normal"].includes(e.caixa)) o.caixa = e.caixa;
+    const cor = COR(e.cor); if (cor) o.cor = cor;
+    if (Object.keys(o).length) est[a] = o;
+  });
+  out.estilos = est;
 
   const ids = new Set();
   out.categorias = (Array.isArray(c.categorias) ? c.categorias : []).slice(0, 40).map(x => {

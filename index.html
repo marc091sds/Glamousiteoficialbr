@@ -661,6 +661,34 @@ footer a{color:#fff}
       if(soc){var a=document.createElement("a");a.href=u;a.target="_blank";a.rel="noopener";a.setAttribute("data-x","1");a.setAttribute("aria-label",x[1]);a.textContent=x[2];soc.appendChild(a)}
       if(at){var b=document.createElement("a");b.href=u;b.target="_blank";b.rel="noopener";b.setAttribute("data-x","1");b.textContent=x[1];at.appendChild(document.createElement("br")).setAttribute("data-x","1");at.appendChild(b)}});
   };
+  /* estilos de texto escolhidos no painel (fonte, tamanho, peso, cor…) */
+  var FONTES={montserrat:["'Montserrat',sans-serif",""],cormorant:["'Cormorant Garamond',serif",""],playfair:["'Playfair Display',serif","Playfair+Display:wght@400;700;800;900"],alfa:["'Alfa Slab One',serif",""],
+    poppins:["'Poppins',sans-serif","Poppins:wght@400;600;700;800"],lobster:["'Lobster',cursive","Lobster"],pacifico:["'Pacifico',cursive","Pacifico"],dancing:["'Dancing Script',cursive","Dancing+Script:wght@400;700"],
+    greatvibes:["'Great Vibes',cursive","Great+Vibes"],oswald:["'Oswald',sans-serif","Oswald:wght@400;600;700"],bebas:["'Bebas Neue',sans-serif","Bebas+Neue"],raleway:["'Raleway',sans-serif","Raleway:wght@400;600;800"],
+    quicksand:["'Quicksand',sans-serif","Quicksand:wght@400;600;700"],abril:["'Abril Fatface',serif","Abril+Fatface"],caveat:["'Caveat',cursive","Caveat:wght@400;700"],satisfy:["'Satisfy',cursive","Satisfy"],
+    lato:["'Lato',sans-serif","Lato:wght@400;700;900"],roboto:["'Roboto',sans-serif","Roboto:wght@400;500;700"]};
+  var AREAS={geral:["body,button,input,select,textarea",""],topo:[".bar .bm,.bar .bm a","11.5px"],marca:[".logo .nm","19px"],menu:[".nv button,.nv a","12.5px"],
+    banner1:[".sc b","clamp(40px,13vw,92px)"],banner2:[".sc small","clamp(11px,3vw,19px)"],quadros:[".bn p,.bn b","12px"],titulos:["h2","30px"],produto:[".pb h3","13px"],preco:[".pb .pr","18px"],rodape:["footer","13px"]};
+  var CAIXA={maiuscula:"uppercase",minuscula:"lowercase",capitalizar:"capitalize",normal:"none"};
+  var estiloOld=window.__ui;
+  window.__ui=function(cfg){
+    estiloOld(cfg);
+    var est=(cfg&&cfg.estilos)||{},css="",q=[];
+    Object.keys(AREAS).forEach(function(a){var e=est[a];if(!e)return;var r=[];
+      if(e.fonte&&FONTES[e.fonte]){r.push("font-family:"+FONTES[e.fonte][0]+" !important");if(FONTES[e.fonte][1])q.push(FONTES[e.fonte][1])}
+      if(e.tam&&AREAS[a][1])r.push("font-size:calc("+AREAS[a][1]+" * "+(e.tam/100)+") !important");
+      if(e.peso)r.push("font-weight:"+e.peso+" !important");
+      if(e.italico)r.push("font-style:italic !important");
+      if(e.caixa&&CAIXA[e.caixa])r.push("text-transform:"+CAIXA[e.caixa]+" !important");
+      if(e.cor&&/^#[0-9a-f]{6}$/i.test(e.cor))r.push("color:"+e.cor+" !important");
+      if(r.length)css+=AREAS[a][0]+"{"+r.join(";")+"}\n"});
+    var st=document.getElementById("elg-estilos");if(!st){st=document.createElement("style");st.id="elg-estilos";document.head.appendChild(st)}
+    st.textContent=css;
+    var lk=document.getElementById("elg-fontes");
+    if(q.length){var u="https://fonts.googleapis.com/css2?family="+q.filter(function(v,i){return q.indexOf(v)===i}).join("&family=")+"&display=swap";
+      if(!lk){lk=document.createElement("link");lk.id="elg-fontes";lk.rel="stylesheet";document.head.appendChild(lk)}if(lk.href!==u)lk.href=u}
+    else if(lk)lk.parentNode.removeChild(lk);
+  };
   try{var c=JSON.parse(localStorage.getItem(CH)||"null");if(c&&c.v&&window.CATALOGO){window.__mesclar(window.CATALOGO,c);window.__ui(c)}}catch(e){}
 })();
 </script>
