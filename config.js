@@ -7,7 +7,7 @@
 const crypto = require("crypto");
 const { abrir, abrirImg } = require("../lib/dados");
 
-const J = (c, o) => ({ statusCode: c, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }, body: JSON.stringify(o) });
+const J = (c, o) => ({ statusCode: c, headers: { "Content-Type": "application/json", "Cache-Control": "no-store", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify(o) });
 
 function senhaOk(s) {
   const a = Buffer.from(String(s || "").trim()), b = Buffer.from(String(process.env.ADMIN_SENHA || "").trim());
@@ -27,6 +27,22 @@ const TAGS = ["destaque", "oferta", "vendido", "lancamento", "ultimas", "exclusi
 const FONTES = ["montserrat", "cormorant", "playfair", "alfa", "poppins", "lobster", "pacifico", "dancing", "greatvibes", "oswald", "bebas", "raleway", "quicksand", "abril", "caveat", "satisfy", "lato", "roboto"];
 const AREAS = ["geral", "topo", "marca", "menu", "banner1", "banner2", "quadros", "titulos", "produto", "preco", "rodape"];
 const lista = (v, max, n) => (Array.isArray(v) ? v : []).map(x => S(x, n)).filter(Boolean).slice(0, max);
+
+function limparEstilos(estilos, areas) {
+  const est = {};
+  areas.forEach(a => {
+    const e = (estilos || {})[a]; if (!e || typeof e !== "object") return;
+    const o = {};
+    if (FONTES.includes(e.fonte)) o.fonte = e.fonte;
+    const t = Math.round(N(e.tam, 100, 60, 220)); if (t !== 100) o.tam = t;
+    if ([400, 500, 600, 700, 800, 900].includes(+e.peso)) o.peso = +e.peso;
+    if (e.italico) o.italico = true;
+    if (["maiuscula", "minuscula", "capitalizar", "normal"].includes(e.caixa)) o.caixa = e.caixa;
+    const cor = COR(e.cor); if (cor) o.cor = cor;
+    if (Object.keys(o).length) est[a] = o;
+  });
+  return est;
+}
 
 function limparConfig(c) {
   c = c && typeof c === "object" ? c : {};
@@ -52,19 +68,7 @@ function limparConfig(c) {
   ["pink", "soft", "rose", "deep", "ink", "bg"].forEach(k => { const v = COR((c.cores || {})[k]); if (v) cores[k] = v; });
   out.cores = cores;
 
-  const est = {};
-  AREAS.forEach(a => {
-    const e = (c.estilos || {})[a]; if (!e || typeof e !== "object") return;
-    const o = {};
-    if (FONTES.includes(e.fonte)) o.fonte = e.fonte;
-    const t = Math.round(N(e.tam, 100, 60, 220)); if (t !== 100) o.tam = t;
-    if ([400, 500, 600, 700, 800, 900].includes(+e.peso)) o.peso = +e.peso;
-    if (e.italico) o.italico = true;
-    if (["maiuscula", "minuscula", "capitalizar", "normal"].includes(e.caixa)) o.caixa = e.caixa;
-    const cor = COR(e.cor); if (cor) o.cor = cor;
-    if (Object.keys(o).length) est[a] = o;
-  });
-  out.estilos = est;
+  out.estilos = limparEstilos(c.estilos, AREAS);
 
   const ids = new Set();
   out.categorias = (Array.isArray(c.categorias) ? c.categorias : []).slice(0, 40).map(x => {
@@ -104,6 +108,37 @@ function limparConfig(c) {
   return out;
 }
 
+// ---------- site de bio ----------
+const BAREAS = ["geral", "frase", "titulo", "sub", "peca", "botao", "botaosub", "rodape"];
+function limparBio(c) {
+  c = c && typeof c === "object" ? c : {};
+  const o = {
+    whats: S(c.whats, 20).replace(/\D/g, ""), mensagem: S(c.mensagem, 300), instagram: HTTPS(c.instagram), grupo: HTTPS(c.grupo),
+    logo: U(c.logo), frase: lista(c.frase, 8, 40), fraseModo: c.fraseModo === "texto" ? "texto" : "colagem",
+    tituloVaral: S(c.tituloVaral, 40), subVaral: S(c.subVaral, 60), mostrarVaral: c.mostrarVaral !== false,
+    rodape: S(c.rodape, 140), titulo: S(c.titulo, 120), descricao: S(c.descricao, 200),
+    efeitos: { fundo: !(c.efeitos && c.efeitos.fundo === false), rolar: !(c.efeitos && c.efeitos.rolar === false) }
+  };
+  const cores = {}; ["cream", "skin", "rose", "deep", "ink"].forEach(k => { const v = COR((c.cores || {})[k]); if (v) cores[k] = v; });
+  o.cores = cores;
+  const bid = new Set();
+  o.botoes = (Array.isArray(c.botoes) ? c.botoes : []).slice(0, 14).map(b => {
+    if (!b) return null;
+    let id = slug(b.id) || "b" + bid.size; while (bid.has(id)) id += "-2"; bid.add(id);
+    const x = { id, tipo: b.tipo === "whats" ? "whats" : "link", icone: S(b.icone, 8), titulo: S(b.titulo, 50), sub: S(b.sub, 80), link: HTTPS(b.link) };
+    if (b.ativo === false) x.ativo = false; return x;
+  }).filter(b => b && b.titulo);
+  const pid = new Set();
+  o.polaroids = (Array.isArray(c.polaroids) ? c.polaroids : []).slice(0, 40).map(p => {
+    if (!p) return null;
+    let id = slug(p.id) || "p" + pid.size; while (pid.has(id)) id += "-2"; pid.add(id);
+    const x = { id, nome: S(p.nome, 40), emoji: S(p.emoji, 8) || "👗", fotos: (Array.isArray(p.fotos) ? p.fotos : []).map(U).filter(Boolean).slice(0, 3) };
+    if (p.ativo === false) x.ativo = false; return x;
+  }).filter(p => p && p.fotos.length);
+  o.estilos = limparEstilos(c.estilos, BAREAS);
+  return o;
+}
+
 exports.handler = async (event) => {
   try {
     const q = event.queryStringParameters || {};
@@ -115,7 +150,13 @@ exports.handler = async (event) => {
         const m = d && /^data:(image\/(?:jpeg|png|webp|gif));base64,([A-Za-z0-9+/=]+)$/.exec(d);
         if (!m) return { statusCode: 404, headers: { "Content-Type": "text/plain" }, body: "Imagem não encontrada" };
         return { statusCode: 200, isBase64Encoded: true, body: m[2],
-          headers: { "Content-Type": m[1], "Cache-Control": "public, max-age=31536000, immutable" } };
+          headers: { "Content-Type": m[1], "Cache-Control": "public, max-age=31536000, immutable", "Access-Control-Allow-Origin": "*" } };
+      }
+      if (q.bio) {
+        const bc = await (await abrir(event)).get("bio");
+        if (!bc || Array.isArray(bc) || !bc.v) return J(200, { existe: false });
+        if (String(q.v || "") === String(bc.v)) return J(200, { igual: true, v: bc.v });
+        return J(200, { existe: true, ...bc });
       }
       const c = await (await abrir(event)).get("config");
       if (!c || Array.isArray(c) || !c.v) return J(200, { existe: false });
@@ -144,6 +185,18 @@ exports.handler = async (event) => {
       if (JSON.stringify(cfg).length > 900000) return J(400, { erro: "Configuração grande demais." });
       await (await abrir(event)).set("config", cfg);
       return J(200, { ok: true, v: cfg.v });
+    }
+
+    if (b.a === "salvar_bio") {
+      const bc = limparBio(b.bio);
+      bc.v = Date.now();
+      if (JSON.stringify(bc).length > 400000) return J(400, { erro: "Configuração do bio grande demais." });
+      await (await abrir(event)).set("bio", bc);
+      return J(200, { ok: true, v: bc.v });
+    }
+    if (b.a === "restaurar_bio") {
+      await (await abrir(event)).set("bio", {});
+      return J(200, { ok: true });
     }
 
     if (b.a === "restaurar") {
