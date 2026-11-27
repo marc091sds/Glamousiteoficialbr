@@ -7,17 +7,47 @@
   directory = "netlify/functions"
   included_files = ["catalogo.js"]
 
-# Sempre baixar a versão mais nova do painel e do site (evita ficar preso em versão antiga no navegador)
+# ---- Endereços do site (forçados: valem mesmo que existam arquivos antigos/repetidos no GitHub) ----
+# Painel: https://seusite/admin
+[[redirects]]
+  from = "/admin"
+  to = "/painel.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/admin.html"
+  to = "/painel.html"
+  status = 200
+  force = true
+
+# Loja: https://seusite/
+[[redirects]]
+  from = "/"
+  to = "/loja.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/index.html"
+  to = "/loja.html"
+  status = 200
+  force = true
+
+# Bio (link do Instagram): https://seusite/bio
+[[redirects]]
+  from = "/bio"
+  to = "/bio-glamour.html"
+  status = 200
+  force = true
+
+# Sempre baixar a versão mais nova (evita ficar preso em versão antiga no navegador)
 [[headers]]
-  for = "/admin.html"
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "no-cache, must-revalidate"
+[[headers]]
+  for = "/admin"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
-
-[[headers]]
-  for = "/index.html"
-  [headers.values]
-    Cache-Control = "no-cache"
-
 [[headers]]
   for = "/"
   [headers.values]
