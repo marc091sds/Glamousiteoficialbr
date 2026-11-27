@@ -47,7 +47,7 @@ main{max-width:860px;margin:0 auto;padding:14px}
 </div>
 
 <div id="app" hidden>
-  <div class="top"><b>Painel El Glamour <small style="font-weight:400;opacity:.7">v4 · site de bio</small></b><span id="st"></span><a href="/" target="_blank" rel="noopener">Ver loja ↗</a><button id="pub">Publicar alterações</button></div>
+  <div class="top"><b>Painel El Glamour <small style="font-weight:400;opacity:.7">v5 · bio integrado</small></b><span id="st"></span><a href="/" target="_blank" rel="noopener">Ver loja ↗</a><a href="/bio" target="_blank" rel="noopener">Ver bio ↗</a><button id="pub">Publicar alterações</button></div>
   <div id="tabs"></div>
   <main id="view"></main>
 </div>
@@ -359,11 +359,9 @@ function telaBio(){
      <button class="o s" data-biocor-reset="1">Voltar às cores originais</button></div>`;
   }
   else if(abaBio==="estilos")h+=telaEstilos("bio");
-  else h+=`<h1>Conexão com o bio</h1><div class="c"><h3>Endereço deste painel</h3><p><b>${esc(location.origin)}</b></p>
-    <p>O site de bio busca o conteúdo daqui. Existem duas formas de ligar:</p>
-    <p><b>Opção A — bio em outro endereço (site separado):</b> no arquivo <code>index.html</code> do bio, procure a linha <code>const PAINEL = "";</code> e troque por:</p>
-    <textarea readonly rows="2" onclick="this.select()">const PAINEL = "${esc(location.origin)}";</textarea>
-    <p><b>Opção B — bio dentro do site da loja:</b> coloque o <code>index.html</code> do bio numa pasta chamada <code>bio</code> no GitHub da loja (ficará em <code>${esc(location.origin)}/bio/</code>). Nesse caso não precisa mudar nada.</p></div>
+  else h+=`<h1>Endereço do bio</h1><div class="c"><h3>Link do seu bio (coloque na bio do Instagram)</h3>
+    <input readonly onclick="this.select()" value="${esc(location.origin)}/bio"><div class="r"><a href="/bio" target="_blank" rel="noopener"><button class="s">Abrir o bio ↗</button></a></div>
+    <p><small>O bio fica dentro do mesmo site da loja (arquivo <code>bio.html</code>) e é atualizado automaticamente quando você clica em "Publicar alterações".</small></p></div>
     <div class="c"><h3>Zona de risco</h3><p>Volta o bio ao conteúdo original que está no arquivo dele.</p><button class="r s" data-bio-restaurar="1">Restaurar bio original</button></div>`;
   return h;
 }

@@ -1,0 +1,35 @@
+[build]
+  publish = "."
+  # Os arquivos estão soltos na raiz do GitHub; este comando monta as pastas que as funções precisam.
+  command = "mkdir -p netlify/functions netlify/lib && for f in feedback frete pagamento config; do cp $f.js netlify/functions/ 2>/dev/null || true; done && for f in comum dados; do cp $f.js netlify/lib/ 2>/dev/null || true; done"
+
+[functions]
+  directory = "netlify/functions"
+  included_files = ["catalogo.js"]
+
+# Sempre baixar a versão mais nova do painel e do site (evita ficar preso em versão antiga no navegador)
+[[headers]]
+  for = "/admin.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+# Página do bio: https://seusite/bio
+[[redirects]]
+  from = "/bio"
+  to = "/bio.html"
+  status = 200
+
+[[headers]]
+  for = "/bio.html"
+  [headers.values]
+    Cache-Control = "no-cache"
